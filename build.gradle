@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.7.4'
     id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -40,14 +41,14 @@ dependencies {
 
     // querydsl
     implementation 'com.querydsl:querydsl-jpa'
-    implementation("com.querydsl:querydsl-apt")
+    implementation 'com.querydsl:querydsl-apt'
 
     // firebase
     implementation 'com.google.firebase:firebase-admin:6.8.1'
 
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
-    implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.4'
     runtimeOnly 'com.h2database:h2'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -66,7 +67,53 @@ dependencies {
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
 }
 
+jar {
+    enabled = false
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
 
+def querydslDir = "$buildDir/generated/querydsl" as Object
+//def querydslDir = "src/main/generated"
+
+querydsl {
+    library = "com.querydsl:querydsl-apt"
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    compileOnly{
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    if(file(querydslDir)){
+        delete(file(querydslDir))
+    }
+    options.annotationProcessorPath = configurations.querydsl
+}
+
+project.afterEvaluate {
+    project.tasks.compileQuerydsl.options.compilerArgs = [
+            "-proc:only",
+            "-processor", project.querydsl.processors() +
+                    ',lombok.launch.AnnotationProcessorHider$AnnotationProcessor'
+    ]
+}
+
+tasks.withType(JavaCompile){
+    options.generatedSourceOutputDirectory = file(querydslDir)
+}
+
+clean.doLast{
+    delete file(querydslDir)
+}
