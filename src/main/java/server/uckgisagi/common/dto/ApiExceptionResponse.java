@@ -8,18 +8,18 @@ import server.uckgisagi.common.exception.ErrorStatusCode;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class ApiErrorResponse {
+public class ApiExceptionResponse {
 
     private ErrorStatusCode statusCode;
     private int status;
     private String message;
 
-    public static ApiErrorResponse error(ErrorResponseResult responseResult) {
-        return new ApiErrorResponse(responseResult.getStatusCode(), responseResult.getStatus(), responseResult.getMessage());
+    public static ApiExceptionResponse error(ErrorResponseResult responseResult) {
+        return new ApiExceptionResponse(responseResult.getStatusCode(), responseResult.getStatus(), responseResult.getMessage());
     }
 
-    public static ApiErrorResponse error(ErrorResponseResult responseResult, String message) {
-        return new ApiErrorResponse(responseResult.getStatusCode(), responseResult.getStatus(), message);
+    public static ApiExceptionResponse error(ErrorResponseResult responseResult, String message) {
+        return new ApiExceptionResponse(responseResult.getStatusCode(), responseResult.getStatus(), message);
     }
 
 }

@@ -15,7 +15,7 @@ import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import server.uckgisagi.common.dto.ApiErrorResponse;
+import server.uckgisagi.common.dto.ApiExceptionResponse;
 import server.uckgisagi.common.exception.custom.UckGiSaGiException;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -34,11 +34,11 @@ public class ExceptionControllerAdvice {
      * <b>UckGiSaGiException Custom Exception</b>
      */
     @ExceptionHandler(UckGiSaGiException.class)
-    protected ResponseEntity<ApiErrorResponse> handleBaseException(UckGiSaGiException exception) {
+    protected ResponseEntity<ApiExceptionResponse> handleBaseException(UckGiSaGiException exception) {
         log.error(exception.getMessage(), exception);
         return ResponseEntity
                 .status(exception.getStatus())
-                .body(ApiErrorResponse.error(exception.getResponseResult()));
+                .body(ApiExceptionResponse.error(exception.getResponseResult()));
     }
 
     /**
@@ -47,10 +47,10 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(BindException.class)
-    protected ApiErrorResponse handleBadRequest(final BindException e) {
+    protected ApiExceptionResponse handleBadRequest(final BindException e) {
         log.error(e.getMessage());
         FieldError fieldError = Objects.requireNonNull(e.getFieldError());
-        return ApiErrorResponse.error(VALIDATION_EXCEPTION, String.format("%s (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
+        return ApiExceptionResponse.error(VALIDATION_EXCEPTION, String.format("%s (%s)", fieldError.getDefaultMessage(), fieldError.getField()));
     }
 
     /**
@@ -59,9 +59,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    protected ApiErrorResponse handleHttpMessageNotReadableException(final HttpMessageNotReadableException e) {
+    protected ApiExceptionResponse handleHttpMessageNotReadableException(final HttpMessageNotReadableException e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(VALIDATION_ENUM_VALUE_EXCEPTION);
+        return ApiExceptionResponse.error(VALIDATION_ENUM_VALUE_EXCEPTION);
     }
 
     /**
@@ -70,9 +70,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(MissingRequestValueException.class)
-    protected ApiErrorResponse handle(final MissingRequestValueException e) {
+    protected ApiExceptionResponse handle(final MissingRequestValueException e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(VALIDATION_REQUEST_MISSING_EXCEPTION);
+        return ApiExceptionResponse.error(VALIDATION_REQUEST_MISSING_EXCEPTION);
     }
 
     /**
@@ -81,9 +81,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(BAD_REQUEST)
     @ExceptionHandler(TypeMismatchException.class)
-    protected ApiErrorResponse handleTypeMismatchException(final TypeMismatchException e) {
+    protected ApiExceptionResponse handleTypeMismatchException(final TypeMismatchException e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(VALIDATION_WRONG_TYPE_EXCEPTION, String.format("%s (%s)", VALIDATION_WRONG_TYPE_EXCEPTION.getMessage(), e.getValue()));
+        return ApiExceptionResponse.error(VALIDATION_WRONG_TYPE_EXCEPTION, String.format("%s (%s)", VALIDATION_WRONG_TYPE_EXCEPTION.getMessage(), e.getValue()));
     }
 
     /**
@@ -95,9 +95,9 @@ public class ExceptionControllerAdvice {
             ServletRequestBindingException.class,
             ConstraintViolationException.class
     })
-    protected ApiErrorResponse handleInvalidFormatException(final Exception e) {
+    protected ApiExceptionResponse handleInvalidFormatException(final Exception e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(VALIDATION_EXCEPTION);
+        return ApiExceptionResponse.error(VALIDATION_EXCEPTION);
     }
 
     /**
@@ -106,9 +106,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(METHOD_NOT_ALLOWED)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    protected ApiErrorResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+    protected ApiExceptionResponse handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(METHOD_NOT_ALLOWED_EXCEPTION);
+        return ApiExceptionResponse.error(METHOD_NOT_ALLOWED_EXCEPTION);
     }
 
     /**
@@ -116,9 +116,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(NOT_ACCEPTABLE)
     @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-    protected ApiErrorResponse handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException e) {
+    protected ApiExceptionResponse handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException e) {
         log.error(e.getMessage());
-        return ApiErrorResponse.error(NOT_ACCEPTABLE_EXCEPTION);
+        return ApiExceptionResponse.error(NOT_ACCEPTABLE_EXCEPTION);
     }
 
     /**
@@ -127,9 +127,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeException.class)
-    protected ApiErrorResponse handleHttpMediaTypeException(final HttpMediaTypeException e) {
+    protected ApiExceptionResponse handleHttpMediaTypeException(final HttpMediaTypeException e) {
         log.error(e.getMessage(), e);
-        return ApiErrorResponse.error(UNSUPPORTED_MEDIA_TYPE_EXCEPTION);
+        return ApiExceptionResponse.error(UNSUPPORTED_MEDIA_TYPE_EXCEPTION);
     }
 
     /**
@@ -137,9 +137,9 @@ public class ExceptionControllerAdvice {
      */
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    protected ApiErrorResponse handleException(final Exception exception) {
+    protected ApiExceptionResponse handleException(final Exception exception) {
         log.error(exception.getMessage(), exception);
-        return ApiErrorResponse.error(INTERNAL_SERVER_EXCEPTION);
+        return ApiExceptionResponse.error(INTERNAL_SERVER_EXCEPTION);
     }
 
 }
