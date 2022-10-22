@@ -1,0 +1,5 @@
+firebase:
+  fcm:
+    config:
+      path: firebase/uckgisagi-firebase-admin.json
+#    scope: https://www.googleapis.com/auth/firebase.messaging
