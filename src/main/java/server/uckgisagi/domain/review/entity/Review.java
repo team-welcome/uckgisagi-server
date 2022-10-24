@@ -35,7 +35,7 @@ public class Review {
         this.comment = comment;
     }
 
-    public static Review of(Store store, User user, String comment) {
+    public static Review newInstance(Store store, User user, String comment) {
         return new Review(store, user, comment);
     }
 
