@@ -20,6 +20,10 @@ public class ApiSuccessResponse<T> {
         return new ApiSuccessResponse<>(SuccessStatusCode.OK, "", null);
     }
 
+    public static <T> ApiSuccessResponse<T> success(SuccessResponseResult responseResult) {
+        return new ApiSuccessResponse<>(responseResult.getStatusCode(), responseResult.getMessage(), null);
+    }
+
     public static <T> ApiSuccessResponse<T> success(SuccessResponseResult responseResult, T data) {
         return new ApiSuccessResponse<>(responseResult.getStatusCode(), responseResult.getMessage(), data);
     }
