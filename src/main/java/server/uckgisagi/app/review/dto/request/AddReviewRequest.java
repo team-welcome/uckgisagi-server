@@ -9,20 +9,23 @@ import server.uckgisagi.domain.store.entity.Store;
 import server.uckgisagi.domain.user.entity.User;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class AddReviewRequest {
 
-    @NotBlank
+    @NotNull
     private Long storeId;
 
     @NotBlank
     private String content;
 
     public Review toReviewEntity(Store store, User user) {
-        return Review.newInstance(store, user, content);
+        Review review = Review.newInstance(store, user, content);
+        store.addReview(review);
+        return review;
     }
 
 }
