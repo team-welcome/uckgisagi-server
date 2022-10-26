@@ -19,6 +19,8 @@ public enum SuccessResponseResult {
     OK_SEARCH_STORE(OK, "리필 스테이션의 위치를 조회했습니다"),
     OK_SEARCH_MY_POST(OK, "나의 인증 글을 조회했습니다"),
     OK_SEARCH_ALL_POST(OK, "모든 인증 글을 조회했습니다"),
+    OK_SEARCH_MY_HOME_CONTENTS(OK, "나의 홈 뷰를 조회했습니다"),
+    OK_SEARCH_FRIEND_HOME_CONTENTS(OK, "친구의 홈 뷰를 조회했습니다"),
 
     // 201 CREATED
     SUCCESS_CREATED(CREATED, ""),
