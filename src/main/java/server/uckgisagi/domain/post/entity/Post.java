@@ -23,6 +23,9 @@ public class Post extends AuditingTimeEntity {
     private User user;
 
     @Column(nullable = false)
+    private String imageUrl;
+
+    @Column(nullable = false)
     private String title;
 
     @Column(nullable = false)
