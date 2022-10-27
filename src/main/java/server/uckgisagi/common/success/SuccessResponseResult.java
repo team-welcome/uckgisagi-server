@@ -30,6 +30,7 @@ public enum SuccessResponseResult {
     CREATED_STORE(CREATED, "새로운 리필 스테이션이 등록되었습니다"),
     CREATED_CERTIFICATION_POST(CREATED, "새로운 인증 포스트가 등록되었습니다"),
     CREATED_UPDATE_STORE(CREATED, "리필 스테이션 정보가 수정되었습니다"),
+    CREATED_NOTIFICATION(CREATED, "알람이 성공적으로 전송되었습니다"),
 
     // 202 ACCEPTED
     SUCCESS_ACCEPTED(ACCEPTED, ""),
