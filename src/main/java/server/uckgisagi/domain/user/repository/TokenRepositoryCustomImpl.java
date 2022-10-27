@@ -1,0 +1,22 @@
+package server.uckgisagi.domain.user.repository;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import lombok.RequiredArgsConstructor;
+
+import static server.uckgisagi.domain.user.entity.QToken.*;
+
+@RequiredArgsConstructor
+public class TokenRepositoryCustomImpl implements TokenRepositoryCustom {
+
+    private final JPAQueryFactory query;
+
+    @Override
+    public String findFcmTokenByUserId(Long userId) {
+        return query
+                .select(token.fcmToken).distinct()
+                .from(token)
+                .where(token.userId.eq(userId))
+                .fetchFirst();
+    }
+
+}
