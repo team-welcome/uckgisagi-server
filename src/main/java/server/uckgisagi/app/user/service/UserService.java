@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.dto.request.SearchUserRequest;
-import server.uckgisagi.app.follow.dto.response.FollowStatus;
+import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.UserRepository;

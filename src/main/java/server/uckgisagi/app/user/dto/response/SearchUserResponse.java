@@ -1,7 +1,6 @@
 package server.uckgisagi.app.user.dto.response;
 
 import lombok.*;
-import server.uckgisagi.app.follow.dto.response.FollowStatus;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.entity.enumerate.UserGrade;
 
