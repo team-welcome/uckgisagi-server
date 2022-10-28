@@ -13,6 +13,7 @@ public enum SuccessResponseResult {
     // 200 OK
     SUCCESS_OK(OK, ""),
     OK_RETRIEVE_USER_INFO(OK, "유저의 정보를 조회했습니다"),
+    OK_SEARCH_USER(OK, "닉네임으로 유저를 검색했습니다"),
     OK_RETRIEVE_ONE_STORE(OK, "리필 스테이션을 조회했습니다"),
     OK_RETRIEVE_ALL_STORE(OK, "모든 리필 스테이션을 조회했습니다"),
     OK_RETRIEVE_STORE_REVIEW(OK, "리필 스테이션의 후기를 조회했습니다"),
@@ -36,7 +37,8 @@ public enum SuccessResponseResult {
     SUCCESS_ACCEPTED(ACCEPTED, ""),
 
     // 204 NOT_CONTENT
-    SUCCESS_NO_CONTENT(NO_CONTENT, "")
+    SUCCESS_NO_CONTENT(NO_CONTENT, ""),
+    NO_CONTENT_UNFOLLOW_USER(NO_CONTENT, "언팔로우에 성공했습니다"),
     ;
 
     private final SuccessStatusCode statusCode;
