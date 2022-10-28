@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
+import server.uckgisagi.domain.follow.entity.Follow;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.user.entity.embedded.SocialInfo;
 import server.uckgisagi.domain.user.entity.enumerate.SocialType;
@@ -13,6 +14,7 @@ import server.uckgisagi.domain.user.entity.enumerate.UserStatus;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -45,6 +47,18 @@ public class User extends AuditingTimeEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Post> posts = new ArrayList<>();
 
+    /**
+     * 나를 팔로우하는 유저 List
+     */
+    @OneToMany(mappedBy = "follower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Follow> followers = new ArrayList<>(); // 여기 있는 followee 는 다 this(User), follower 는 나를 팔로우하는 애들
+
+    /**
+     * 내가 팔로우하는 유저 List
+     */
+    @OneToMany(mappedBy = "followee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Follow> followings = new ArrayList<>(); // 여기 있는 followee 는 다 내가 팔로우하는 friend, follower 는 this(User)
+
     private User(final String socialId, final SocialType socialType, final String nickname) {
         this.socialInfo = SocialInfo.of(socialId, socialType);
         this.nickname = nickname;
@@ -52,8 +66,44 @@ public class User extends AuditingTimeEntity {
         this.status = UserStatus.ACTIVE;
     }
 
+    public static User newInstance(String socialId, SocialType socialType, String nickname) {
+        return new User(socialId, socialType, nickname);
+    }
+
     public void setTokenInfo(Token token) {
         this.token = token;
+    }
+
+    public String getUserFcmToken() {
+        return this.token.getFcmToken();
+    }
+
+    /**
+     * 나를 팔로우하는 유저 추가
+     * @param follower 나를 팔로우하는 유저
+     */
+    public void addFollower(User follower) {
+        this.followers.add(Follow.newInstance(this, follower));
+    }
+
+    /**
+     * 내가 팔로우하는 유저 추가
+     * @param target 내가 팔로우하는 유저
+     */
+    public void addFollowing(User target) {
+        this.followings.add(Follow.newInstance(target, this));
+    }
+
+    public List<User> getMyFollowers() {
+        return this.followers.stream()
+                .map(Follow::getFollower)
+                .collect(Collectors.toList());
+    }
+
+    public List<User> getMyFollowings() {
+        return this.followings.stream()
+                .map(Follow::getFollowee)
+                .collect(Collectors.toList());
     }
 
     void addPosts(Post post) {

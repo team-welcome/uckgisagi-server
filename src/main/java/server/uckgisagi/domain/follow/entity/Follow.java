@@ -31,7 +31,7 @@ public class Follow extends AuditingTimeEntity {
         this.follower = follower;
     }
 
-    public static Follow of(User followee, User follower) {
+    public static Follow newInstance(User followee, User follower) {
         return new Follow(followee, follower);
     }
 
