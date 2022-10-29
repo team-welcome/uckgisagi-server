@@ -2,6 +2,7 @@ package server.uckgisagi.domain.follow.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import server.uckgisagi.domain.follow.entity.Follow;
 import server.uckgisagi.domain.user.entity.User;
 
 import java.util.List;
@@ -20,6 +21,16 @@ public class FollowRepositoryCustomImpl implements FollowRepositoryCustom {
                 .from(follow)
                 .where(follow.follower.id.in(userId))
                 .fetch();
+    }
+
+    @Override
+    public Follow findFollowByFolloweeUserIdAndFollowerUserId(Long followeeUserId, Long followerUserId) {
+        return query
+                .selectFrom(follow)
+                .where(
+                        follow.followee.id.eq(followeeUserId),
+                        follow.follower.id.eq(followerUserId)
+                ).fetchOne();
     }
 
 }
