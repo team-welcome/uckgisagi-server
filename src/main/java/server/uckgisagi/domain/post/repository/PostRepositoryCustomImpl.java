@@ -18,6 +18,14 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
     private static final long ONE_DAY = 1L;
 
     @Override
+    public Post findPostByPostId(Long postId) {
+        return query
+                .selectFrom(post)
+                .where(post.id.eq(postId))
+                .fetchFirst();
+    }
+
+    @Override
     public List<Post> findPostByUserId(Long userId) {
         return query
                 .selectFrom(post)

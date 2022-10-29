@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PostRepositoryCustom {
+    Post findPostByPostId(Long postId);
     List<Post> findPostByUserId(Long userId);
     boolean existsByTodayDate(LocalDate today, Long userId);
     List<User> findUserIdsByTodayDate(LocalDate today, List<Long> userIds);
