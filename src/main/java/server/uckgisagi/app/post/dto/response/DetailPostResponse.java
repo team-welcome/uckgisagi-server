@@ -16,7 +16,8 @@ public class DetailPostResponse extends AuditingTimeResponse {
     private ScrapStatus scrapStatus;
 
     @Builder(access = AccessLevel.PACKAGE)
-    private DetailPostResponse( Long postId, String nickname, String imageUrl, String content, ScrapStatus scrapStatus) {
+    private DetailPostResponse(final Long postId, final String nickname, final String imageUrl,
+                               final String content, final ScrapStatus scrapStatus) {
         this.postId = postId;
         this.nickname = nickname;
         this.imageUrl = imageUrl;
@@ -25,15 +26,13 @@ public class DetailPostResponse extends AuditingTimeResponse {
     }
 
     public static DetailPostResponse of(Post post, String nickname, ScrapStatus scrapStatus) {
-        DetailPostResponse response = DetailPostResponse.builder()
+        return DetailPostResponse.builder()
                 .postId(post.getId())
                 .nickname(nickname)
                 .imageUrl(post.getImageUrl())
                 .content(post.getContent())
                 .scrapStatus(scrapStatus)
                 .build();
-        response.setBaseTime(post);
-        return response;
     }
 
 }
