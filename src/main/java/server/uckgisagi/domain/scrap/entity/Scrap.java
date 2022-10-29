@@ -27,4 +27,13 @@ public class Scrap extends AuditingTimeEntity {
     @JoinColumn(name = "post_id")
     private Post post;     // 스크랩한 게시물 아이디
 
+    private Scrap(final User user, final Post post) {
+        this.user = user;
+        this.post = post;
+    }
+
+    public static Scrap newInstance(User user, Post post) {
+        return new Scrap(user, post);
+    }
+
 }
