@@ -1,4 +1,4 @@
-package server.uckgisagi.domain.postscrap.entity;
+package server.uckgisagi.domain.scrap.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
