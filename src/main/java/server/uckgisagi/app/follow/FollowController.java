@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import server.uckgisagi.app.follow.dto.request.FollowRequest;
+import server.uckgisagi.app.follow.service.FollowService;
 import server.uckgisagi.app.notification.provider.NotificationServiceProvider;
 import server.uckgisagi.app.notification.service.NotificationService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;

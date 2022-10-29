@@ -1,4 +1,4 @@
-package server.uckgisagi.app.follow;
+package server.uckgisagi.app.follow.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,9 +33,7 @@ public class FollowService {
     @Transactional
     public void unfollowUser(FollowRequest request, Long userId ){
         followRepository.delete(
-                Follow.newInstance(
-                        UserServiceUtils.findByUserId(userRepository, request.getTargetUserId()),
-                        UserServiceUtils.findByUserId(userRepository, userId))
+                FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, request.getTargetUserId(), userId)
         );
     }
 
