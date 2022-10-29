@@ -1,9 +1,9 @@
 package server.uckgisagi.domain.scrap.repository;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.domain.scrap.entity.Scrap;
 
 import java.util.List;
 
@@ -32,6 +32,16 @@ public class ScrapRepositoryCustomImpl implements ScrapRepositoryCustom {
                         scrap.post.eq(post),
                         scrap.user.id.eq(userId)
                 ).fetchFirst() != null;
+    }
+
+    @Override
+    public Scrap findScrapByPostIdAndUserId(Long postId, Long userId) {
+        return query
+                .selectFrom(scrap)
+                .where(
+                        scrap.user.id.eq(userId),
+                        scrap.post.id.eq(postId)
+                ).fetchOne();
     }
 
 }
