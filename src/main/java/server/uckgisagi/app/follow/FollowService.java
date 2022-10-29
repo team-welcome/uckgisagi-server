@@ -18,7 +18,7 @@ public class FollowService {
     private final FollowRepository followRepository;
 
     @Transactional
-    public void followUser(FollowRequest request, Long userId) {
+    public User followUser(FollowRequest request, Long userId) {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
         User targetUser = UserServiceUtils.findByUserId(userRepository, request.getTargetUserId());
 
@@ -26,6 +26,8 @@ public class FollowService {
 
         me.addFollowing(targetUser);
         targetUser.addFollower(me);
+
+        return targetUser;
     }
 
     @Transactional

@@ -24,11 +24,8 @@ public class FollowController {
     @ApiOperation("[인증] 유저 검색 페이지 - 팔로우 신청하기")
     @PostMapping("/v1/follow")
     public ApiSuccessResponse<SuccessResponseResult> followUser(@Valid @RequestBody FollowRequest request, Long userId) {
-        followService.followUser(request, userId);
-
         NotificationService notificationService = notificationServiceProvider.getNotificationService(NotificationType.FOLLOW);
-        notificationService.sendNotification(userId, request.getTargetUserId());
-
+        notificationService.sendNotification(userId, followService.followUser(request, userId));
         return ApiSuccessResponse.success(CREATED_NOTIFICATION);
     }
 
