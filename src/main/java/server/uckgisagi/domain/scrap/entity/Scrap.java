@@ -1,4 +1,4 @@
-package server.uckgisagi.domain.postscrap.entity;
+package server.uckgisagi.domain.scrap.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PostScrap extends AuditingTimeEntity {
+public class Scrap extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

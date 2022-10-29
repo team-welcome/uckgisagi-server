@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: 아직설정안함
+      secretKey: 아직설정안함
+    s3:
+      bucket: 아직설정안함
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false

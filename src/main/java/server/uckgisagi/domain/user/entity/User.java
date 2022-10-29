@@ -106,16 +106,13 @@ public class User extends AuditingTimeEntity {
                 .collect(Collectors.toList());
     }
 
-    void addPosts(Post post) {
+    public void addPosts(Post post) {
         this.posts.add(post);
+        this.changeGrade();
     }
 
-    void changeNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void changeGrade(int count) {
-        switch (count) {
+    private void changeGrade() {
+        switch (this.getPosts().size()) {
             case 5:
                 this.grade = UserGrade.BARON;
                 break;
@@ -132,6 +129,10 @@ public class User extends AuditingTimeEntity {
                 this.grade = UserGrade.KING;
                 break;
         }
+    }
+
+    void changeNickname(String nickname) {
+        this.nickname = nickname;
     }
 
 }

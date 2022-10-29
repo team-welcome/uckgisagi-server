@@ -1,6 +1,7 @@
 package server.uckgisagi.domain.post.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
@@ -30,5 +31,22 @@ public class Post extends AuditingTimeEntity {
 
     @Column(nullable = false)
     private String content;
+
+    @Builder(access = AccessLevel.PACKAGE)
+    private Post(final User user, final String imageUrl, final String title, final String content) {
+        this.user = user;
+        this.imageUrl = imageUrl;
+        this.title = title;
+        this.content = content;
+    }
+
+    public static Post newInstance(User user, String imageUrl, String title, String content) {
+        return Post.builder()
+                .user(user)
+                .imageUrl(imageUrl)
+                .title(title)
+                .content(content)
+                .build();
+    }
 
 }
