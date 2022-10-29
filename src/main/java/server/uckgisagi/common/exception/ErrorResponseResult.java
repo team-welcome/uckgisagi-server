@@ -30,6 +30,7 @@ public enum ErrorResponseResult {
     NOT_FOUND_EXCEPTION(NOT_FOUND, "존재하지 않습니다"),
     NOT_FOUND_STORE_EXCEPTION(NOT_FOUND, "해당 리필 스테이션이 존재하지 않습니다"),
     NOT_FOUND_USER_EXCEPTION(NOT_FOUND, "탈퇴하거나 존재하지 않는 유저입니다"),
+    NOT_FOUND_POST_EXCEPTION(NOT_FOUND, "존재하지 않는 게시글입니다"),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED_EXCEPTION(METHOD_NOT_ALLOWED, "지원하지 않는 메소드 입니다"),
