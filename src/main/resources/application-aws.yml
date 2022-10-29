@@ -1,0 +1,11 @@
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAV5JSVJK3LQLS5CMJ아직설정안함
+      secretKey: 64fZWd2Gea1PPuUK91MN3Mz6wdDB4G4tFW1vk9X9아직설정안함
+    s3:
+      bucket: mayfillbucket아직설정안함
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
