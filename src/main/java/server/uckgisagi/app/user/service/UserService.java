@@ -3,6 +3,7 @@ package server.uckgisagi.app.user.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import server.uckgisagi.app.user.dto.request.CreateUserDto;
 import server.uckgisagi.app.user.dto.request.SearchUserRequest;
 import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
@@ -17,6 +18,12 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Transactional
+    public User registerUser(CreateUserDto requestDto) {
+        UserServiceUtils.validateNotExistsUser(userRepository, requestDto.getSocialId(), requestDto.getSocialType());
+        return userRepository.save(User.newInstance(requestDto.getSocialId(),requestDto.getSocialType(), requestDto.getNickname()));
+    }
 
     @Transactional(readOnly = true)
     public List<SearchUserResponse> searchUserByNickname(SearchUserRequest request, Long userId) {

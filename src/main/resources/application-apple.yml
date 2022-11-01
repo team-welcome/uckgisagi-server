@@ -1,8 +1,0 @@
-apple:
-  clientId: com.test.apple.login
-  authorization-grant-type: authorization_code
-  redirectUri: https://test.com/oauth2/redirect
-  scope: openid,name,email
-  authorizationUri: https://appleid.apple.com/auth/authorize?response_mode=form_post
-  token-uri: https://appleid.apple.com/auth/token
-  jwkSetUri: https://appleid.apple.com/auth/keys

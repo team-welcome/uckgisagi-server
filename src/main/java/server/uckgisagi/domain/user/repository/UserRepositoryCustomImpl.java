@@ -3,6 +3,7 @@ package server.uckgisagi.domain.user.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.domain.user.entity.enumerate.SocialType;
 
 import java.util.List;
 
@@ -27,6 +28,27 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
                 .selectFrom(user).distinct()
                 .where(user.nickname.contains(nickname))
                 .fetch();
+    }
+
+    @Override
+    public User findUserBySocialIdAndSocialType(String socialId, SocialType socialType) {
+        return query
+                .selectFrom(user)
+                .where(
+                        user.socialInfo.socialId.eq(socialId),
+                        user.socialInfo.socialType.eq(socialType)
+                ).fetchOne();
+    }
+
+    @Override
+    public boolean existsBySocialIdAndSocialType(String socialId, SocialType socialType) {
+        return query
+                .selectOne()
+                .from(user)
+                .where(
+                        user.socialInfo.socialId.eq(socialId),
+                        user.socialInfo.socialType.eq(socialType)
+                ).fetchFirst() != null;
     }
 
 }

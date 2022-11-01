@@ -9,8 +9,6 @@ server:
 spring:
   profiles:
     default: dev
-  config:
-    import: application-apple.yml
 
 
 
