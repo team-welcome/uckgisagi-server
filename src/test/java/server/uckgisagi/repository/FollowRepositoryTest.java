@@ -13,6 +13,9 @@ import server.uckgisagi.domain.user.repository.UserRepository;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
 //@DataJpaTest
 //@Import(TestConfig.class)
 @SpringBootTest
@@ -39,31 +42,40 @@ public class FollowRepositoryTest {
         User thirdTarget = User.newInstance("thirdSocialId", SocialType.APPLE, "ThirdNickname");
         userRepository.saveAll(List.of(first, secondTarget, thirdTarget));
 
-        followRepository.saveAll(
-                List.of(
-                        Follow.newInstance(secondTarget, first),
-                        Follow.newInstance(thirdTarget, first))
-        );
+        Follow follow = Follow.newInstance(secondTarget, first);
+        Follow follow1 = Follow.newInstance(thirdTarget, first);
+        followRepository.saveAll(List.of(follow, follow1));
 
-        first.addFollowing(secondTarget);
-        first.addFollowing(thirdTarget);
+        first.addFollowing(follow);
+        first.addFollowing(follow1);
 
-        secondTarget.addFollower(first);
-        thirdTarget.addFollower(first);
+        secondTarget.addFollower(follow);
+        thirdTarget.addFollower(follow1);
 
         // when
         System.out.println("================= findMyFollowingUserByUserId =================");
         /**
          * inner join 쿼리 한방
          */
-        followRepository.findMyFollowingUserByUserId(first.getId());
+        List<User> joinQuery = followRepository.findMyFollowingUserByUserId(first.getId());
 
         System.out.println("================= getMyFollowing =================");
         /**
          * 쿼리 안날아감
          */
-        first.getMyFollowings();
+        List<User> noQuery = first.getMyFollowings();
 
+        // then
+        assertAll(
+                () -> assertThat(joinQuery).isNotEmpty(),
+                () -> assertThat(noQuery).isNotEmpty(),
+                () -> {
+                    joinQuery.forEach(user -> {
+                        boolean contains = noQuery.contains(user);
+                        assertTrue(contains);
+                    });
+                }
+        );
     }
 
 }
