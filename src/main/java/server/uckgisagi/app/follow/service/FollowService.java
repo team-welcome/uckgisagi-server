@@ -22,19 +22,25 @@ public class FollowService {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
         User targetUser = UserServiceUtils.findByUserId(userRepository, request.getTargetUserId());
 
-        followRepository.save(Follow.newInstance(targetUser, me));
+        FollowServiceUtils.validateNotFollowingUser(followRepository, targetUser.getId(), me.getId());
 
-        me.addFollowing(targetUser);
-        targetUser.addFollower(me);
+        Follow followInfo = followRepository.save(Follow.newInstance(targetUser, me));
+        targetUser.addFollower(followInfo);
+        me.addFollowing(followInfo);
 
         return targetUser;
     }
 
     @Transactional
-    public void unfollowUser(FollowRequest request, Long userId ){
-        followRepository.delete(
-                FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, request.getTargetUserId(), userId)
-        );
+    public void unfollowUser(FollowRequest request, Long userId) {
+        User me = UserServiceUtils.findByUserId(userRepository, userId);
+        User friend = UserServiceUtils.findByUserId(userRepository, request.getTargetUserId());
+
+        Follow followInfo = FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, request.getTargetUserId(), userId);
+        me.deleteFollowing(followInfo);
+        friend.deleteFollower(followInfo);
+
+        followRepository.delete(followInfo);
     }
 
 }
