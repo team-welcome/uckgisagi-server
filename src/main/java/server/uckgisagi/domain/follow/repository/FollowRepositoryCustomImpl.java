@@ -15,6 +15,17 @@ public class FollowRepositoryCustomImpl implements FollowRepositoryCustom {
     private final JPAQueryFactory query;
 
     @Override
+    public boolean existsByTargetUserIdAndUserId(Long targetUserId, Long userId) {
+        return query
+                .selectOne()
+                .from(follow)
+                .where(
+                        follow.followee.id.eq(targetUserId),
+                        follow.follower.id.eq(userId)
+                ).fetchFirst() != null;
+    }
+
+    @Override
     public List<User> findMyFollowingUserByUserId(Long userId) {
         return query
                 .select(follow.followee).distinct()

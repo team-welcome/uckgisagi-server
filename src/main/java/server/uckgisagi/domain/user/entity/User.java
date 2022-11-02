@@ -79,19 +79,19 @@ public class User extends AuditingTimeEntity {
     }
 
     /**
-     * 나를 팔로우하는 유저 추가
+     * <b>나를 팔로우하는 유저 추가</b><br>
      * @param follower 나를 팔로우하는 유저
      */
-    public void addFollower(User follower) {
-        this.followers.add(Follow.newInstance(this, follower));
+    public void addFollower(Follow follower) {
+        this.followers.add(follower);
     }
 
     /**
-     * 내가 팔로우하는 유저 추가
-     * @param target 내가 팔로우하는 유저
+     * <b>내가 팔로우하는 유저 추가</b><br>
+     * @param myFollowing 내가 팔로우하는 유저
      */
-    public void addFollowing(User target) {
-        this.followings.add(Follow.newInstance(target, this));
+    public void addFollowing(Follow myFollowing) {
+        this.followings.add(myFollowing);
     }
 
     public List<User> getMyFollowers() {
@@ -104,6 +104,14 @@ public class User extends AuditingTimeEntity {
         return this.followings.stream()
                 .map(Follow::getFollowee)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteFollower(Follow follower) {
+        this.followers.remove(follower);
+    }
+
+    public void deleteFollowing(Follow following) {
+        this.followings.remove(following);
     }
 
     public void addPosts(Post post) {

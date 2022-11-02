@@ -1,6 +1,7 @@
 package server.uckgisagi.app.follow.service;
 
 import org.jetbrains.annotations.NotNull;
+import server.uckgisagi.common.exception.custom.ConflictException;
 import server.uckgisagi.common.exception.custom.NotFoundException;
 import server.uckgisagi.domain.follow.entity.Follow;
 import server.uckgisagi.domain.follow.repository.FollowRepository;
@@ -17,4 +18,11 @@ public class FollowServiceUtils {
         }
         return follow;
     }
+
+    public static void validateNotFollowingUser(FollowRepository followRepository, Long targetUserId, Long userId) {
+        if (followRepository.existsByTargetUserIdAndUserId(targetUserId, userId)) {
+            throw new ConflictException(String.format("이미 팔로우중인 유저 (%s) 입니다", targetUserId), CONFLICT_ALREADY_EXIST_FOLLOW_EXCEPTION);
+        }
+    }
+
 }

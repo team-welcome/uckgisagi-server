@@ -44,6 +44,7 @@ public enum ErrorResponseResult {
     CONFLICT_EXCEPTION(CONFLICT, "이미 존재합니다"),
     CONFLICT_ALREADY_EXIST_USER_EXCEPTION(CONFLICT, "이미 존재하는 유저입니다"),
     CONFLICT_ALREADY_EXIST_STORE_EXCEPTION(CONFLICT, "이미 존재하는 리필스테이션입니다"),
+    CONFLICT_ALREADY_EXIST_FOLLOW_EXCEPTION(CONFLICT, "이미 팔로우중인 유저입니다"),
 
     // 415 Unsupported Media Type
     UNSUPPORTED_MEDIA_TYPE_EXCEPTION(UNSUPPORTED_MEDIA_TYPE, "해당하는 미디어 타입을 지원하지 않습니다."),
