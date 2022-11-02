@@ -1,21 +1,20 @@
 package server.uckgisagi.app.follow.dto.request;
 
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 
 @ToString
 @Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class FollowRequest {
 
     @NotNull
     private Long targetUserId;
 
-    private FollowRequest() {}
-
-    private FollowRequest(final Long targetUserId) {
-        this.targetUserId = targetUserId;
+    public static FollowRequest fromTest(final Long targetUserId) {
+        return new FollowRequest(targetUserId);
     }
 
 }
