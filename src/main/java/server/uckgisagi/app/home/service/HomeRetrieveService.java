@@ -1,14 +1,11 @@
-package server.uckgisagi.app.home;
+package server.uckgisagi.app.home.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import server.uckgisagi.app.home.dto.response.HomePostResponse;
-import server.uckgisagi.app.home.dto.response.HomeUserResponse;
-import server.uckgisagi.app.home.dto.response.TodayPostStatus;
-import server.uckgisagi.app.home.dto.response.UserResponseDto;
+import server.uckgisagi.app.home.dto.response.*;
 import server.uckgisagi.app.post.dto.response.PostResponse;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.domain.post.entity.Post;
@@ -24,15 +21,18 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class HomeRetrieveService {
+public class HomeRetrieveService implements HomeService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
     private final LocalDate TODAY_DATE = LocalDate.now(ZoneId.of("Asia/Seoul"));
+    private final LocalDate THIS_MONTH_DATE = LocalDate.of(TODAY_DATE.getYear(), TODAY_DATE.getMonthValue(), START_DAY_OF_MONTH);
+
     private static final int START_DAY_OF_MONTH = 1;
     private static final long ONE_MONTH = 1L;
 
+    @Override
     @Transactional(readOnly = true)
     public HomeUserResponse retrieveMeAndFriendInfo(Long userId) {
         User user = UserServiceUtils.findByUserId(userRepository, userId);
@@ -41,46 +41,6 @@ public class HomeRetrieveService {
         List<UserResponseDto> friendsInfoResponseDto = getFriendsInfoResponseDto(user);
 
         return HomeUserResponse.of(myInfoResponseDto, friendsInfoResponseDto);
-    }
-
-    @Transactional(readOnly = true)
-    public HomePostResponse retrieveMyHomeContents(Long userId) {
-        return getHomePostResponse(postRepository.findPostByUserId(userId));
-    }
-
-    @Transactional(readOnly = true)
-    public HomePostResponse retrieveFriendHomeContents(Long friendUserId) {
-        return getHomePostResponse(postRepository.findPostByUserId(friendUserId));
-    }
-
-    private HomePostResponse getHomePostResponse(List<Post> postByUserId) {
-        return HomePostResponse.of(
-                getPostDatesInThisMonth(postByUserId),
-                getPostResponses(postByUserId)
-        );
-    }
-
-    @Nullable
-    private List<LocalDate> getPostDatesInThisMonth(List<Post> posts) {
-        return posts.stream()
-                .map(post -> {
-                    LocalDate postCreatedAt = post.getCreatedAt().toLocalDate();
-                    return isWithinThisMonth(postCreatedAt) ? postCreatedAt : null;
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
-    private boolean isWithinThisMonth(LocalDate postCreatedAt) {
-        final LocalDate THIS_MONTH_DATE = LocalDate.of(TODAY_DATE.getYear(), TODAY_DATE.getMonthValue(), START_DAY_OF_MONTH);
-        return postCreatedAt.isAfter(THIS_MONTH_DATE) && postCreatedAt.isBefore(THIS_MONTH_DATE.plusMonths(ONE_MONTH));
-    }
-
-    @NotNull
-    private List<PostResponse> getPostResponses(List<Post> posts) {
-        return posts.stream()
-                .map(PostResponse::from)
-                .collect(Collectors.toList());
     }
 
     private List<UserResponseDto> getFriendsInfoResponseDto(User user) {
@@ -105,6 +65,42 @@ public class HomeRetrieveService {
                         ? TodayPostStatus.ACTIVE
                         : TodayPostStatus.INACTIVE
         );
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public HomePostResponse retrieveHomeContents(Long userId) {
+        User user = UserServiceUtils.findByUserId(userRepository, userId);
+        return getHomePostResponse(postRepository.findPostByUserId(user.getId()));
+    }
+
+    private HomePostResponse getHomePostResponse(List<Post> postByUserId) {
+        return HomePostResponse.of(
+                getPostDatesInThisMonth(postByUserId),
+                getPostResponses(postByUserId)
+        );
+    }
+
+    @Nullable
+    private List<LocalDate> getPostDatesInThisMonth(List<Post> posts) {
+        return posts.stream()
+                .map(post -> {
+                    LocalDate postCreatedAt = post.getCreatedAt().toLocalDate();
+                    return isWithinThisMonth(postCreatedAt) ? postCreatedAt : null;
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    private boolean isWithinThisMonth(LocalDate postCreatedAt) {
+        return postCreatedAt.isAfter(THIS_MONTH_DATE) && postCreatedAt.isBefore(THIS_MONTH_DATE.plusMonths(ONE_MONTH));
+    }
+
+    @NotNull
+    private List<PostResponse> getPostResponses(List<Post> posts) {
+        return posts.stream()
+                .map(PostResponse::from)
+                .collect(Collectors.toList());
     }
 
 }
