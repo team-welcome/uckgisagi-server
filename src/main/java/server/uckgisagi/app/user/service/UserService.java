@@ -35,13 +35,13 @@ public class UserService {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
         List<User> myFollowings = me.getMyFollowings();
 
-        return userRepository.findAllUserByNickname(request.getNickname()).stream()
-                .map(user -> {
-                    if (myFollowings.contains(user)) {
-                        return SearchUserResponse.of(user, FollowStatus.ACTIVE);
-                    }
-                    return SearchUserResponse.of(user, FollowStatus.INACTIVE);
-                }).collect(Collectors.toList());
+        return userRepository
+                .findAllUserByNickname(request.getNickname()).stream()
+                .map(user -> myFollowings.contains(user)
+                        ? SearchUserResponse.of(user, FollowStatus.ACTIVE)
+                        : SearchUserResponse.of(user, FollowStatus.INACTIVE)
+                )
+                .collect(Collectors.toList());
     }
 
 }
