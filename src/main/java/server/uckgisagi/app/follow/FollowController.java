@@ -9,7 +9,10 @@ import server.uckgisagi.app.notification.provider.NotificationServiceProvider;
 import server.uckgisagi.app.notification.service.NotificationService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.common.success.SuccessResponseResult;
+import server.uckgisagi.config.interceptor.Auth;
+import server.uckgisagi.config.resolver.LoginUserId;
 import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -23,8 +26,9 @@ public class FollowController {
     private final NotificationServiceProvider notificationServiceProvider;
 
     @ApiOperation("[인증] 유저 검색 페이지 - 팔로우 신청하기")
+    @Auth
     @PostMapping("/v1/follow")
-    public ApiSuccessResponse<SuccessResponseResult> followUser(@Valid @RequestBody FollowRequest request, Long userId) {
+    public ApiSuccessResponse<SuccessResponseResult> followUser(@Valid @RequestBody FollowRequest request, @ApiIgnore @LoginUserId Long userId) {
         NotificationService notificationService = notificationServiceProvider.getNotificationService(NotificationType.FOLLOW);
         notificationService.sendNotification(userId, followService.followUser(request, userId));
         return ApiSuccessResponse.success(CREATED_NOTIFICATION);
@@ -32,7 +36,7 @@ public class FollowController {
 
     @ApiOperation("[인증] 유저 검색 페이지 - 언팔로우 하기")
     @DeleteMapping("/v1/unfollow")
-    public ApiSuccessResponse<SuccessResponseResult> unfollowUser(@Valid @RequestBody FollowRequest request, Long userId) {
+    public ApiSuccessResponse<SuccessResponseResult> unfollowUser(@Valid @RequestBody FollowRequest request,  @ApiIgnore @LoginUserId Long userId) {
         followService.unfollowUser(request, userId);
         return ApiSuccessResponse.success(NO_CONTENT_UNFOLLOW_USER);
     }

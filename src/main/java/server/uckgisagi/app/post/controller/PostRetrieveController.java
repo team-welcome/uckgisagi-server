@@ -9,6 +9,8 @@ import server.uckgisagi.app.post.dto.response.DetailPostResponse;
 import server.uckgisagi.app.post.dto.response.PreviewPostResponse;
 import server.uckgisagi.app.post.service.PostRetrieveService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
+import server.uckgisagi.config.interceptor.Auth;
+import server.uckgisagi.config.resolver.LoginUserId;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
@@ -22,26 +24,30 @@ public class PostRetrieveController {
     private final PostRetrieveService postRetrieveService;
 
     @ApiOperation("[인증] 둘러보기 페이지 - 모든 유저의 챌린지 글 조회하기")
+    @Auth
     @GetMapping("/v1/post/all")
-    public ApiSuccessResponse<List<PreviewPostResponse>> retrieveAllPost(@ApiIgnore Long userId) {
+    public ApiSuccessResponse<List<PreviewPostResponse>> retrieveAllPost(@ApiIgnore @LoginUserId Long userId) {
         return ApiSuccessResponse.success(OK_SEARCH_ALL_POST, postRetrieveService.retrieveAllPost(userId));
     }
 
     @ApiOperation("[인증] 둘러보기 페이지 - 챌린지 글 상세보기")
+    @Auth
     @GetMapping("/v1/post/{postId}")
-    public ApiSuccessResponse<DetailPostResponse> retrieveDetailPost(@PathVariable Long postId, @ApiIgnore Long userId) {
+    public ApiSuccessResponse<DetailPostResponse> retrieveDetailPost(@PathVariable Long postId, @ApiIgnore @LoginUserId Long userId) {
         return ApiSuccessResponse.success(OK_SEARCH_POST, postRetrieveService.retrieveDetailPost(postId, userId));
     }
 
     @ApiOperation("[인증] 스크랩 페이지 - 유저가 스크랩한 챌린지 글 조회하기")
+    @Auth
     @GetMapping("/v1/post/scrap")
-    public ApiSuccessResponse<List<PreviewPostResponse>> retrieveScrapPost(@ApiIgnore Long userId) {
+    public ApiSuccessResponse<List<PreviewPostResponse>> retrieveScrapPost(@ApiIgnore @LoginUserId Long userId) {
         return ApiSuccessResponse.success(OK_SEARCH_MY_SCRAP_POST, postRetrieveService.retrieveScrapPost(userId));
     }
 
     @ApiOperation("[인증] 스크랩 페이지 - 유저가 스크랩한 챌린지 글 상세보기")
+    @Auth
     @GetMapping("/v1/post/scrap/{postId}")
-    public ApiSuccessResponse<DetailPostResponse> retrieveDetailScrapPost(@PathVariable Long postId, @ApiIgnore Long userId) {
+    public ApiSuccessResponse<DetailPostResponse> retrieveDetailScrapPost(@PathVariable Long postId, @ApiIgnore @LoginUserId Long userId) {
         return ApiSuccessResponse.success(OK_SEARCH_MY_SCRAP_POST_DETAIL, postRetrieveService.retrieveDetailScrapPost(postId, userId));
     }
 
