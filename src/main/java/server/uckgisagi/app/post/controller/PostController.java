@@ -10,6 +10,9 @@ import server.uckgisagi.app.post.dto.request.AddPostRequest;
 import server.uckgisagi.app.post.dto.response.GradeResponse;
 import server.uckgisagi.app.post.service.PostService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
+import server.uckgisagi.config.interceptor.Auth;
+import server.uckgisagi.config.resolver.LoginUserId;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -22,8 +25,11 @@ public class PostController {
     private final PostService postService;
 
     @ApiOperation("[인증] 챌린지 작성 페이지 - 챌린지 글 작성하기")
+    @Auth
     @PostMapping("/v1/post")
-    public ApiSuccessResponse<GradeResponse> addPostWithImage(@Valid AddPostRequest request, @RequestPart MultipartFile imageFile, Long userId) {
+    public ApiSuccessResponse<GradeResponse> addPostWithImage(@Valid AddPostRequest request,
+                                                              @RequestPart MultipartFile imageFile,
+                                                              @ApiIgnore @LoginUserId Long userId) {
         return ApiSuccessResponse.success(CREATED_CERTIFICATION_POST, postService.addPostWithImage(request, imageFile, userId));
     }
 
