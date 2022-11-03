@@ -5,12 +5,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import server.uckgisagi.app.home.dto.response.HomeResponse;
+import server.uckgisagi.app.home.dto.response.HomePostResponse;
+import server.uckgisagi.app.home.dto.response.HomeUserResponse;
 import server.uckgisagi.app.home.dto.response.TodayPostStatus;
 import server.uckgisagi.app.home.dto.response.UserResponseDto;
 import server.uckgisagi.app.post.dto.response.PostResponse;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.follow.repository.FollowRepository;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.post.repository.PostRepository;
 import server.uckgisagi.domain.user.entity.User;
@@ -34,29 +34,30 @@ public class HomeRetrieveService {
     private static final long ONE_MONTH = 1L;
 
     @Transactional(readOnly = true)
-    public HomeResponse retrieveMyHomeContents(Long userId) {
-        return getHomeResponse(
-                UserServiceUtils.findByUserId(userRepository, userId),
-                postRepository.findPostByUserId(userId)
-        );
-    }
+    public HomeUserResponse retrieveMeAndFriendInfo(Long userId) {
+        User user = UserServiceUtils.findByUserId(userRepository, userId);
 
-    @Transactional(readOnly = true)
-    public HomeResponse retrieveFriendHomeContents(Long userId, Long friendUserId) {
-        return getHomeResponse(
-                UserServiceUtils.findByUserId(userRepository, userId),
-                postRepository.findPostByUserId(friendUserId)
-        );
-    }
-
-    private HomeResponse getHomeResponse(User user, List<Post> postByUserId) {
         UserResponseDto myInfoResponseDto = getMyInfoResponseDto(user);
         List<UserResponseDto> friendsInfoResponseDto = getFriendsInfoResponseDto(user);
 
-        List<LocalDate> postDatesInThisMonth = getPostDatesInThisMonth(postByUserId);
-        List<PostResponse> postResponses = getPostResponses(postByUserId);
+        return HomeUserResponse.of(myInfoResponseDto, friendsInfoResponseDto);
+    }
 
-        return HomeResponse.of(myInfoResponseDto, friendsInfoResponseDto, postDatesInThisMonth, postResponses);
+    @Transactional(readOnly = true)
+    public HomePostResponse retrieveMyHomeContents(Long userId) {
+        return getHomePostResponse(postRepository.findPostByUserId(userId));
+    }
+
+    @Transactional(readOnly = true)
+    public HomePostResponse retrieveFriendHomeContents(Long friendUserId) {
+        return getHomePostResponse(postRepository.findPostByUserId(friendUserId));
+    }
+
+    private HomePostResponse getHomePostResponse(List<Post> postByUserId) {
+        return HomePostResponse.of(
+                getPostDatesInThisMonth(postByUserId),
+                getPostResponses(postByUserId)
+        );
     }
 
     @Nullable
