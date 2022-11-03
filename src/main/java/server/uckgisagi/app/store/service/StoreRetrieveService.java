@@ -19,13 +19,15 @@ public class StoreRetrieveService {
 
     private final StoreRepository storeRepository;
 
+    private static final long LIMIT_SIZE = 5L;
+
     public AllStoreResponse retrieveAllStore() {
         List<Store> allStore = storeRepository.findAllStore();
 
-        List<PreviewStoreDto> popularStoreResponseDto = allStore.stream().limit(5)
+        List<PreviewStoreDto> popularStoreResponseDto = allStore.stream().limit(LIMIT_SIZE)
                 .map(PreviewStoreDto::from)
                 .collect(Collectors.toList());
-        List<PreviewStoreDto> restStoreResponseDto = allStore.stream().skip(5)
+        List<PreviewStoreDto> restStoreResponseDto = allStore.stream().skip(LIMIT_SIZE)
                 .map(PreviewStoreDto::from)
                 .collect(Collectors.toList());
 
