@@ -1,10 +1,10 @@
 cloud:
   aws:
     credentials:
-      accessKey: 아직설정안함
-      secretKey: 아직설정안함
+      accessKey: AKIASXRVBQ2MYAEWXMFQ
+      secretKey: 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
     s3:
-      bucket: 아직설정안함
+      bucket: uckgisagi-bucket
     region:
       static: ap-northeast-2
     stack:
