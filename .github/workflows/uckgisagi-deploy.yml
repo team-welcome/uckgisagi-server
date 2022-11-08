@@ -8,8 +8,8 @@ on:
     branches: [ "develop" ]
 
 env:
-  S3_BUCKET_NAME: mayfillbucket
-  PROJECT_NAME: mayfill
+  S3_BUCKET_NAME: uckgisagi-bucket
+  PROJECT_NAME: uckgisagi-server
 
 jobs:
   build:
