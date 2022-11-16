@@ -4,8 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
 
 env:
   S3_BUCKET_NAME: uckgisagi-bucket
