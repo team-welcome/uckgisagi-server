@@ -1,6 +1,7 @@
 package server.uckgisagi.app;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,7 +41,8 @@ public class FollowServiceTest {
     }
 
     @Test
-    void 유저_팔로우하기_성공() {
+    @DisplayName("유저_팔로우하기_성공")
+    void follow_user_success() {
         final int FIRST = 0;
         final int SECOND = 1;
         // given
@@ -78,7 +80,8 @@ public class FollowServiceTest {
     }
 
     @Test
-    void 이미_팔로우한_유저를_팔로우하려는_경우_실패() {
+    @DisplayName("이미_팔로우한_유저를_팔로우하려는_경우_실패")
+    void already_follow_user_will_throw_exception() {
         final int FIRST = 0;
         final int SECOND = 1;
 
@@ -99,7 +102,8 @@ public class FollowServiceTest {
     }
 
     @Test
-    void 유저_언팔로우하기_성공() {
+    @DisplayName("유저_언팔로우하기_성공")
+    void unfollow_user_success() {
         final int FIRST = 0;
         final int SECOND = 1;
         // given
@@ -131,7 +135,8 @@ public class FollowServiceTest {
     }
 
     @Test
-    void 이미_언팔로우한_유저를_언팔로우_할때_실패() {
+    @DisplayName("이미_언팔로우한_유저를_언팔로우_할때_실패")
+    void already_unfollow_user_will_throw_exception() {
         final int FIRST = 0;
         final int SECOND = 1;
         List<User> users = userRepository.saveAll(List.of(
