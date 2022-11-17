@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
 import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
+import server.uckgisagi.domain.follow.repository.FollowRepository;
 import server.uckgisagi.domain.user.entity.Token;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.TokenRepository;
@@ -20,6 +21,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
+    private final FollowRepository followRepository;
 
     @Transactional
     public User registerUser(CreateUserDto requestDto) {
@@ -31,8 +33,9 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<SearchUserResponse> searchUserByNickname(String nickname, Long userId) {
-        User me = UserServiceUtils.findByUserId(userRepository, userId);
-        List<User> myFollowings = me.getMyFollowings();
+        UserServiceUtils.findByUserId(userRepository, userId);
+        List<User> myFollowings = followRepository.findMyFollowingUserByUserId(userId);
+//        List<User> myFollowings = me.getMyFollowings();
 
         return userRepository
                 .findAllUserByNickname(nickname).stream()

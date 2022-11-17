@@ -23,9 +23,9 @@ public class FollowService {
 
         FollowServiceUtils.validateNotFollowingUser(followRepository, targetUser.getId(), me.getId());
 
-        Follow followInfo = followRepository.save(Follow.newInstance(targetUser, me));
-        targetUser.addFollower(followInfo);
-        me.addFollowing(followInfo);
+        followRepository.save(Follow.newInstance(targetUser, me));
+//        targetUser.addFollower(followInfo);
+//        me.addFollowing(followInfo);
 
         return targetUser;
     }

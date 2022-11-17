@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.home.dto.response.*;
 import server.uckgisagi.app.post.dto.response.PostResponse;
 import server.uckgisagi.app.user.service.UserServiceUtils;
+import server.uckgisagi.domain.follow.repository.FollowRepository;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.post.repository.PostRepository;
 import server.uckgisagi.domain.user.entity.User;
@@ -25,6 +26,7 @@ public class HomeRetrieveService implements HomeService {
 
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final FollowRepository followRepository;
 
     private final LocalDate TODAY_DATE = LocalDate.now(ZoneId.of("Asia/Seoul"));
     private final LocalDate THIS_MONTH_DATE = LocalDate.of(TODAY_DATE.getYear(), TODAY_DATE.getMonthValue(), START_DAY_OF_MONTH);
@@ -44,7 +46,8 @@ public class HomeRetrieveService implements HomeService {
     }
 
     private List<UserResponseDto> getFriendsInfoResponseDto(User user) {
-        List<User> friends = user.getMyFollowings();
+//        List<User> friends = user.getMyFollowings();
+        List<User> friends = followRepository.findMyFollowingUserByUserId(user.getId());
         List<Long> friendsIds = friends.stream()
                 .map(User::getId)
                 .collect(Collectors.toList());
