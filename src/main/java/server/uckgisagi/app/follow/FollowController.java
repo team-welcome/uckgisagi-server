@@ -34,6 +34,7 @@ public class FollowController {
     }
 
     @ApiOperation("[인증] 유저 검색 페이지 - 언팔로우 하기")
+    @Auth
     @DeleteMapping("/v1/unfollow/{targetUserId}")
     public ApiSuccessResponse<SuccessResponseResult> unfollowUser(@PathVariable Long targetUserId,  @ApiIgnore @LoginUserId Long userId) {
         followService.unfollowUser(targetUserId, userId);
