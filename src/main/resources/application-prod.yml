@@ -3,6 +3,10 @@ spring:
     activate:
       on-profile: prod
 
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://uckgisagi.cqkpidwwievn.ap-northeast-2.rds.amazonaws.com/uckgisagi_prod?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
