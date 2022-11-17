@@ -3,7 +3,6 @@ package server.uckgisagi.app.follow.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import server.uckgisagi.app.follow.dto.request.FollowRequest;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.domain.follow.entity.Follow;
 import server.uckgisagi.domain.follow.repository.FollowRepository;
@@ -18,9 +17,9 @@ public class FollowService {
     private final FollowRepository followRepository;
 
     @Transactional
-    public User followUser(FollowRequest request, Long userId) {
+    public User followUser(Long targetUserId, Long userId) {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
-        User targetUser = UserServiceUtils.findByUserId(userRepository, request.getTargetUserId());
+        User targetUser = UserServiceUtils.findByUserId(userRepository, targetUserId);
 
         FollowServiceUtils.validateNotFollowingUser(followRepository, targetUser.getId(), me.getId());
 
@@ -32,11 +31,11 @@ public class FollowService {
     }
 
     @Transactional
-    public void unfollowUser(FollowRequest request, Long userId) {
+    public void unfollowUser(Long targetUserId, Long userId) {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
-        User friend = UserServiceUtils.findByUserId(userRepository, request.getTargetUserId());
+        User friend = UserServiceUtils.findByUserId(userRepository, targetUserId);
 
-        Follow followInfo = FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, request.getTargetUserId(), userId);
+        Follow followInfo = FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, targetUserId, userId);
         me.deleteFollowing(followInfo);
         friend.deleteFollower(followInfo);
 

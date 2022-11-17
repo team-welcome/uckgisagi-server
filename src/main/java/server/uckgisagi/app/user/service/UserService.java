@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
-import server.uckgisagi.app.user.dto.request.SearchUserRequest;
 import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
 import server.uckgisagi.domain.user.entity.Token;
@@ -31,12 +30,12 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<SearchUserResponse> searchUserByNickname(SearchUserRequest request, Long userId) {
+    public List<SearchUserResponse> searchUserByNickname(String nickname, Long userId) {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
         List<User> myFollowings = me.getMyFollowings();
 
         return userRepository
-                .findAllUserByNickname(request.getNickname()).stream()
+                .findAllUserByNickname(nickname).stream()
                 .map(user -> myFollowings.contains(user)
                         ? SearchUserResponse.of(user, FollowStatus.ACTIVE)
                         : SearchUserResponse.of(user, FollowStatus.INACTIVE)

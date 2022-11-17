@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import server.uckgisagi.app.follow.dto.request.FollowRequest;
 import server.uckgisagi.app.follow.service.FollowService;
 import server.uckgisagi.common.exception.custom.ConflictException;
 import server.uckgisagi.common.exception.custom.NotFoundException;
@@ -53,10 +52,8 @@ public class FollowServiceTest {
         User user = users.get(FIRST);
         User target = users.get(SECOND);
 
-        FollowRequest request = FollowRequest.fromTest(target.getId());
-
         // when
-        User followUser = followService.followUser(request, user.getId());
+        User followUser = followService.followUser(target.getId(), user.getId());
 
         // then
         assertAll(
@@ -96,9 +93,8 @@ public class FollowServiceTest {
         target.addFollower(followInfo);
         user.addFollowing(followInfo);
 
-        FollowRequest request = FollowRequest.fromTest(target.getId());
 
-        assertThrows(ConflictException.class, () -> followService.followUser(request, user.getId()));
+        assertThrows(ConflictException.class, () -> followService.followUser(target.getId(), user.getId()));
     }
 
     @Test
@@ -118,11 +114,9 @@ public class FollowServiceTest {
         friend.addFollower(followInfo);
         user.addFollowing(followInfo);
 
-        FollowRequest request = FollowRequest.fromTest(friend.getId());
-
         // when
         System.out.println("=============== UnFollow ================");
-        followService.unfollowUser(request, user.getId());
+        followService.unfollowUser(friend.getId(), user.getId());
 
         // then
         System.out.println("=============== THEN ================");
@@ -146,9 +140,7 @@ public class FollowServiceTest {
         User user = users.get(FIRST);
         User friend = users.get(SECOND);
 
-        FollowRequest request = FollowRequest.fromTest(friend.getId());
-
-        assertThrows(NotFoundException.class, () -> followService.unfollowUser(request, user.getId()));
+        assertThrows(NotFoundException.class, () -> followService.unfollowUser(friend.getId(), user.getId()));
     }
 
 }

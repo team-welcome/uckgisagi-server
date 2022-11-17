@@ -31,8 +31,8 @@ public class ScrapService {
     }
 
     @Transactional
-    public void deleteScrap(ScrapRequest request, Long userId) {
-        scrapRepository.delete(ScrapServiceUtils.findByPostIdAndUserId(scrapRepository, request.getPostId(), userId));
+    public void deleteScrap(Long postId, Long userId) {
+        scrapRepository.delete(ScrapServiceUtils.findByPostIdAndUserId(scrapRepository, postId, userId));
     }
 
 }
