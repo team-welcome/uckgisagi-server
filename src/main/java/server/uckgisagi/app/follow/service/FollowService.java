@@ -9,6 +9,7 @@ import server.uckgisagi.domain.follow.repository.FollowRepository;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.UserRepository;
 
+// FIXME: 2022/11/18 user 연관관계 메서드 오류
 @Service
 @RequiredArgsConstructor
 public class FollowService {
@@ -32,14 +33,13 @@ public class FollowService {
 
     @Transactional
     public void unfollowUser(Long targetUserId, Long userId) {
-        User me = UserServiceUtils.findByUserId(userRepository, userId);
-        User friend = UserServiceUtils.findByUserId(userRepository, targetUserId);
+        UserServiceUtils.findByUserId(userRepository, userId);
+        UserServiceUtils.findByUserId(userRepository, targetUserId);
 
-        Follow followInfo = FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, targetUserId, userId);
-        me.deleteFollowing(followInfo);
-        friend.deleteFollower(followInfo);
+//        me.deleteFollowing(followInfo);
+//        friend.deleteFollower(followInfo);
 
-        followRepository.delete(followInfo);
+        followRepository.delete(FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, targetUserId, userId));
     }
 
 }
