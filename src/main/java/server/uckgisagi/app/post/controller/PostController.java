@@ -3,6 +3,7 @@ package server.uckgisagi.app.post.controller;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,5 +34,10 @@ public class PostController {
         return ApiSuccessResponse.success(CREATED_CERTIFICATION_POST, postService.addPostWithImage(request, imageFile, userId));
     }
 
-
+    @ApiOperation("[인증] 둘러보기 페이지 - 게시글 신고하기")
+    @Auth
+    @PostMapping("/v1/post/accuse")
+    public ApiSuccessResponse<AccusePostResponseDto> accusePost(@RequestBody AccusePostRequestDto accusePostRequestDto, @ApiIgnore @LoginUserId Long userId) {
+        return ApiSuccessResponse.success(CREATED_ACCUSE_POST, postService.accusePost(accusePostRequestDto, userId));
+    }
 }
