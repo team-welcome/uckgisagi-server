@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import server.uckgisagi.app.accusation.dto.AccusePostRequestDto;
+import server.uckgisagi.app.accusation.dto.AccusePostResponseDto;
 import server.uckgisagi.app.post.dto.request.AddPostRequest;
 import server.uckgisagi.app.post.dto.response.GradeResponse;
 import server.uckgisagi.app.post.service.PostService;

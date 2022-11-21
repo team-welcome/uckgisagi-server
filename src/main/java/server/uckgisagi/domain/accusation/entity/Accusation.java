@@ -1,16 +1,13 @@
-package server.uckgisagi.domain.accusation;
+package server.uckgisagi.domain.accusation.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.user.entity.User;
 
 import javax.persistence.*;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
