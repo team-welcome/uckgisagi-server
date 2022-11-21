@@ -7,7 +7,8 @@ import server.uckgisagi.domain.accusation.entity.Accusation;
 import java.util.List;
 import java.util.Optional;
 
-import static server.uckgisagi.domain.accusation.QAccusation.accusation;
+import static server.uckgisagi.domain.accusation.entity.QAccusation.accusation;
+
 
 @RequiredArgsConstructor
 public class AccusationCustomRepositoryImpl implements AccusationCustomRepository {

@@ -3,6 +3,7 @@ package server.uckgisagi.domain.scrap.repository;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.domain.post.entity.enumerate.PostStatus;
 import server.uckgisagi.domain.scrap.entity.Scrap;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ScrapRepositoryCustomImpl implements ScrapRepositoryCustom {
         return query
                 .select(scrap.post).distinct()
                 .from(scrap)
+                .where(scrap.post.postStatus.eq(PostStatus.ACTIVE))
                 .where(scrap.user.id.eq(userId))
                 .fetch();
     }
@@ -30,7 +32,8 @@ public class ScrapRepositoryCustomImpl implements ScrapRepositoryCustom {
                 .from(scrap)
                 .where(
                         scrap.post.eq(post),
-                        scrap.user.id.eq(userId)
+                        scrap.user.id.eq(userId),
+                        scrap.post.postStatus.eq(PostStatus.ACTIVE)
                 ).fetchFirst() != null;
     }
 

@@ -17,6 +17,7 @@ import server.uckgisagi.common.type.FileType;
 import server.uckgisagi.domain.accusation.entity.Accusation;
 import server.uckgisagi.domain.accusation.repository.AccusationRepository;
 import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.domain.post.entity.enumerate.PostStatus;
 import server.uckgisagi.domain.post.repository.PostRepository;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.UserRepository;
@@ -59,12 +60,12 @@ public class PostService {
         Accusation accusation = accusationRepository.save(accusePostRequestDto.toAccusationEntity(user, post));
 
         List<Accusation> accusations = accusationRepository.findAllByPostId(accusePostRequestDto.getPostId());
-        if(accusations.size() >= 3){
-            // 게시물 신고가 3번 이상일 경우 안 보이게 하는 로직
-
+        if(accusations.size() >= 10){
+            // 게시물 신고가 10번 이상일 경우 안 보이게 하는 로직
+             post.changePostStatus(PostStatus.INACTIVE);
         }
 
-        return
+        return accusation.toAccusePostResponseDto(accusation);
     }
 
 }

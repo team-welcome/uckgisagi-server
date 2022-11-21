@@ -39,11 +39,12 @@ public class Post extends AuditingTimeEntity {
 
 
     @Builder(access = AccessLevel.PACKAGE)
-    private Post(final User user, final String imageUrl, final String title, final String content) {
+    private Post(final User user, final String imageUrl, final String title, final String content, final PostStatus postStatus) {
         this.user = user;
         this.imageUrl = imageUrl;
         this.title = title;
         this.content = content;
+        this.postStatus = postStatus;
     }
 
     public static Post newInstance(User user, String imageUrl, String title, String content) {
@@ -52,7 +53,13 @@ public class Post extends AuditingTimeEntity {
                 .imageUrl(imageUrl)
                 .title(title)
                 .content(content)
+                .postStatus(PostStatus.ACTIVE)
                 .build();
     }
+
+    public void changePostStatus(PostStatus postStatus){
+        this.postStatus = postStatus;
+    }
+
 
 }
