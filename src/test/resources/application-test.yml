@@ -5,14 +5,14 @@ spring:
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/./database/uckgisagi_dev
-    username: sa_uckgisagi
-    password: pwd_uckgisagi
+    url: jdbc:h2:mem:uckgisagi_test_db
+    username: root
+    password:
 
   jpa:
     database:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true

@@ -1,4 +1,4 @@
-package server.uckgisagi.app;
+/*package server.uckgisagi.app;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -143,4 +143,4 @@ public class FollowServiceTest {
         assertThrows(NotFoundException.class, () -> followService.unfollowUser(friend.getId(), user.getId()));
     }
 
-}
+}*/

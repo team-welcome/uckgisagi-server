@@ -1,4 +1,4 @@
-package server.uckgisagi.repository;
+/*package server.uckgisagi.repository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -54,15 +54,15 @@ public class FollowRepositoryTest {
 
         // when
         System.out.println("================= findMyFollowingUserByUserId =================");
-        /**
+        *//**
          * inner join 쿼리 한방
-         */
+         *//*
         List<User> joinQuery = followRepository.findMyFollowingUserByUserId(first.getId());
 
         System.out.println("================= getMyFollowing =================");
-        /**
+        *//**
          * 쿼리 안날아감
-         */
+         *//*
         List<User> noQuery = first.getMyFollowings();
 
         // then
@@ -78,4 +78,4 @@ public class FollowRepositoryTest {
         );
     }
 
-}
+}*/

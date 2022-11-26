@@ -12,7 +12,7 @@ import server.uckgisagi.domain.user.entity.User;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccusePostRequestDto {
+public class AccusationPostReqDto {
 
     private Long postId;
 

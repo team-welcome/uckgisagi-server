@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccusePostResponseDto {
+public class AccusationPostResDto {
 
     private Long postId;
 

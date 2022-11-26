@@ -63,14 +63,12 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
                 .fetch();
     }
 
-    /*@Override
-    public List<Post> findAllByPostStatus() {
-        return query
-                .selectFrom(post)
-                .where(post.postStatus.eq(PostStatus.ACTIVE))
-                .orderBy(post.createdAt.desc())
-                .fetch();
-
-    }*/
+    @Override
+    public Post findByPostIdAndUserId(Long postId, Long userId){
+        return query.selectFrom(post)
+                .where(post.id.eq(postId))
+                .where(post.user.id.eq((userId)))
+                .fetchOne();
+    }
 
 }

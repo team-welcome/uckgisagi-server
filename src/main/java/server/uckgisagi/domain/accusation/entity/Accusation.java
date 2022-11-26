@@ -1,7 +1,7 @@
 package server.uckgisagi.domain.accusation.entity;
 
 import lombok.*;
-import server.uckgisagi.app.accusation.dto.AccusePostResponseDto;
+import server.uckgisagi.app.accusation.dto.AccusationPostResDto;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.user.entity.User;
@@ -28,8 +28,15 @@ public class Accusation extends AuditingTimeEntity {
     @JoinColumn(name="user_id")
     private User user;
 
-    public AccusePostResponseDto toAccusePostResponseDto(Accusation accusation){
-        return AccusePostResponseDto.builder()
+    public static Accusation newInstance(Post post, User user) {
+        return Accusation.builder()
+                .post(post)
+                .user(user)
+                .build();
+    }
+
+    public AccusationPostResDto toAccusePostResponseDto(Accusation accusation){
+        return AccusationPostResDto.builder()
                 .postId(accusation.getPost().getId())
                 .userId(accusation.getUser().getId())
                 .build();

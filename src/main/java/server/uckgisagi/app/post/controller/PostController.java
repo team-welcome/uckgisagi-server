@@ -2,19 +2,15 @@ package server.uckgisagi.app.post.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import server.uckgisagi.app.accusation.dto.AccusePostRequestDto;
-import server.uckgisagi.app.accusation.dto.AccusePostResponseDto;
 import server.uckgisagi.app.post.dto.request.AddPostRequest;
 import server.uckgisagi.app.post.dto.response.GradeResponse;
 import server.uckgisagi.app.post.service.PostService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
+import server.uckgisagi.domain.post.entity.Post;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
@@ -36,10 +32,11 @@ public class PostController {
         return ApiSuccessResponse.success(CREATED_CERTIFICATION_POST, postService.addPostWithImage(request, imageFile, userId));
     }
 
-    @ApiOperation("[인증] 둘러보기 페이지 - 게시글 신고하기")
+    @ApiOperation("[인증] 챌린지 글 삭제 페이지 - 챌린지 글 삭제하기")
     @Auth
-    @PostMapping("/v1/post/accuse")
-    public ApiSuccessResponse<AccusePostResponseDto> accusePost(@RequestBody AccusePostRequestDto accusePostRequestDto, @ApiIgnore @LoginUserId Long userId) {
-        return ApiSuccessResponse.success(CREATED_ACCUSE_POST, postService.accusePost(accusePostRequestDto, userId));
+    @DeleteMapping("/v1/post/delete")
+    public ApiSuccessResponse<String> deletePost(@RequestParam Long postId, @ApiIgnore @LoginUserId Long userId) {
+        return ApiSuccessResponse.success(NO_CONTENT_DELETE_POST, postService.deletePost(postId, userId));
     }
+
 }

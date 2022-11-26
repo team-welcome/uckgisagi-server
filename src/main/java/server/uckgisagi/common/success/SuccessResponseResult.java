@@ -41,6 +41,7 @@ public enum SuccessResponseResult {
 
     // 204 NOT_CONTENT
     SUCCESS_NO_CONTENT(NO_CONTENT, ""),
+    NO_CONTENT_DELETE_POST(NO_CONTENT, "게시물 삭제에 성공했습니다."),
     NO_CONTENT_UNFOLLOW_USER(NO_CONTENT, "언팔로우에 성공했습니다"),
     NO_CONTENT_SCRAP_POST(NO_CONTENT, "챌린지 글 스크랩에 성공했습니다"),
     NO_CONTENT_CANCEL_SCRAP_POST(NO_CONTENT, "챌린지 글 스크랩 취소에 성공했습니다"),

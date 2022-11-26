@@ -29,4 +29,11 @@ public class UserController {
         return ApiSuccessResponse.success(OK_SEARCH_USER, userService.searchUserByNickname(nickname, userId));
     }
 
+    @ApiOperation("[인증] 유저 차단 페이지 - 특정 유저 차단하기")
+    @Auth
+    @GetMapping("/v1/user/search")
+    public ApiSuccessResponse<List<SearchUserResponse>> blockUser(@RequestParam String nickname, @ApiIgnore @LoginUserId Long userId) {
+        return ApiSuccessResponse.success(OK_SEARCH_USER, userService.searchUserByNickname(nickname, userId));
+    }
+
 }
