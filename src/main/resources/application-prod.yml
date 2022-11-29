@@ -9,9 +9,9 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://uckgisagi.cqkpidwwievn.ap-northeast-2.rds.amazonaws.com/uckgisagi_prod?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://uckgisagi.cqkpidwwievn.ap-northeast-2.rds.amazonaws.com/uckgisagi?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: uckgisagi_admin
-    password: uckgisagi_password
+    password: uckgisagi1234
 
   jpa:
     database: mysql
