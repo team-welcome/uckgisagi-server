@@ -1,6 +1,7 @@
 package server.uckgisagi.repository;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@DataJpaTest
-//@Import(TestConfig.class)
+@Transactional
 @SpringBootTest
 public class FollowRepositoryTest {
 
@@ -34,8 +34,8 @@ public class FollowRepositoryTest {
     }
 
     @Test
-    @Transactional
-    void 내가_팔로우하는_유저_레포지토리_테스트() {
+    @DisplayName("내가_팔로우하는_유저_레포지토리_테스트")
+    void followRepository_test() {
         // given
         User first = User.newInstance("firstSocialId", SocialType.APPLE, "FirstNickname");
         User secondTarget = User.newInstance("secondSocialId", SocialType.APPLE, "SecondNickname");
