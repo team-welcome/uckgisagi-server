@@ -4,14 +4,18 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import server.uckgisagi.app.home.dto.response.HomePostResponse;
 import server.uckgisagi.app.home.dto.response.HomeUserResponse;
 import server.uckgisagi.app.home.service.HomeRetrieveService;
+import server.uckgisagi.app.post.dto.response.PostResponse;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 import static server.uckgisagi.common.success.SuccessResponseResult.*;
 
@@ -35,6 +39,13 @@ public class HomeController {
         return ApiSuccessResponse.success(OK_SEARCH_MY_HOME_CONTENTS, homeRetrieveService.retrieveHomeContents(userId));
     }
 
+    @ApiOperation("[인증] 메인 홈 페이지 - 날짜로 나의 포스트 정보 조회하기")
+    @Auth
+    @GetMapping("/v1/home/me/post")
+    public ApiSuccessResponse<List<PostResponse>> retrieveMyPostByDate(@RequestParam String date, @ApiIgnore @LoginUserId Long userId) {
+        return ApiSuccessResponse.success(OK_SEARCH_MY_HOME_CONTENTS, homeRetrieveService.retrievePostInfoByDate(date, userId));
+    }
+
     @ApiOperation("[인증] 메인 홈 페이지 - 친구의 포스트 정보 보기")
     @Auth
     @GetMapping("/v1/home/{friendUserId}")
@@ -42,4 +53,10 @@ public class HomeController {
         return ApiSuccessResponse.success(OK_SEARCH_FRIEND_HOME_CONTENTS, homeRetrieveService.retrieveHomeContents(friendUserId));
     }
 
+    @ApiOperation("[인증] 메인 홈 페이지 - 날짜로 친구의 포스트 정보 조회하기")
+    @Auth
+    @GetMapping("/v1/home/{friendUserId}/post")
+    public ApiSuccessResponse<List<PostResponse>> retrieveFriendPostByDate(@RequestParam String date, @PathVariable Long friendUserId) {
+        return ApiSuccessResponse.success(OK_SEARCH_MY_HOME_CONTENTS, homeRetrieveService.retrievePostInfoByDate(date, friendUserId));
+    }
 }
