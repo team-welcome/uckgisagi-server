@@ -16,6 +16,7 @@ import server.uckgisagi.domain.user.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -99,11 +100,15 @@ public class HomeRetrieveService implements HomeService {
         return postCreatedAt.isAfter(THIS_MONTH_DATE) && postCreatedAt.isBefore(THIS_MONTH_DATE.plusMonths(ONE_MONTH));
     }
 
+    @Transactional(readOnly = true)
+    public List<PostResponse> retrievePostInfoByDate(String date, Long userId) {
+        return getPostResponses(postRepository.findPostByDateAndUserId(LocalDate.parse(date, DateTimeFormatter.ISO_DATE), userId));
+    }
+
     @NotNull
     private List<PostResponse> getPostResponses(List<Post> posts) {
         return posts.stream()
                 .map(PostResponse::from)
                 .collect(Collectors.toList());
     }
-
 }
