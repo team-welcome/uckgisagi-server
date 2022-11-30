@@ -1,5 +1,6 @@
 package server.uckgisagi.domain.post.repository;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.post.entity.Post;
@@ -72,9 +73,10 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
     }
 
     @Override
-    public List<Post> findAllByPostStatus() {
+    public List<Post> findAllByPostStatus(User loginUser) {
         return query.selectFrom(post)
                 .where(post.postStatus.eq(PostStatus.ACTIVE))
+                .where((Predicate) loginUser.getBlocks().stream().filter(block -> block.getBlockUserId().equals(post.user.id))) // post를 쓴 user의 id가 현재 로그인한 user의 차단 리스트에 있는 id와 같지 않아야 함.
                 .orderBy(post.createdAt.desc())
                 .fetch();
     }

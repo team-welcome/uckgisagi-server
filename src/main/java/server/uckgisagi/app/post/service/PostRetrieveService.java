@@ -27,9 +27,10 @@ public class PostRetrieveService {
     private final ScrapRepository scrapRepository;
 
     public List<PreviewPostResponse> retrieveAllPost(Long userId) {
-        List<Post> scrapedPosts = scrapRepository.findScrapPostByUserId(userId);
+        User loginUser = userRepository.findUserByUserId(userId);
+        List<Post> scrapedPosts = scrapRepository.findScrapPostByUserId(userId, loginUser);
         return postRepository
-                .findAllByPostStatus().stream()
+                .findAllByPostStatus(loginUser).stream()
                 .map(post -> scrapedPosts.contains(post)
                         ? PreviewPostResponse.of(post, ScrapStatus.ACTIVE)
                         : PreviewPostResponse.of(post, ScrapStatus.INACTIVE))
@@ -37,7 +38,8 @@ public class PostRetrieveService {
     }
 
     public List<PreviewPostResponse> retrieveScrapPost(Long userId) {
-        return scrapRepository.findScrapPostByUserId(userId).stream()
+        User loginUser = userRepository.findUserByUserId(userId);
+        return scrapRepository.findScrapPostByUserId(userId,loginUser).stream()
                 .map(post -> PreviewPostResponse.of(post, ScrapStatus.ACTIVE))
                 .collect(Collectors.toList());
     }
