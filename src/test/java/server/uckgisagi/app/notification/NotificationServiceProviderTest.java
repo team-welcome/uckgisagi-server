@@ -12,7 +12,7 @@ import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
+@SpringBootTest(properties = {"spring.config.location=classpath:application-test.yml"})
 public class NotificationServiceProviderTest {
 
     @Autowired
