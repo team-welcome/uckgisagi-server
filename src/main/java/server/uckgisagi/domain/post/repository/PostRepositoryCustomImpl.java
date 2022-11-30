@@ -62,4 +62,16 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public List<Post> findPostByDateAndUserId(LocalDate date, Long userId) {
+        return query
+                .selectFrom(post)
+                .where(
+                        post.user.id.eq(userId),
+                        post.createdAt.between(
+                                date.atStartOfDay(),
+                                date.atStartOfDay().plusDays(ONE_DAY)
+                        ))
+                .fetch();
+    }
 }
