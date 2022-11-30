@@ -1,16 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    context-path: /api
+
 spring:
-  config:
-    activate:
-      on-profile: dev
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/./database/uckgisagi_dev
-    username: sa_uckgisagi
-    password: pwd_uckgisagi
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/uckgisagi_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
 
   jpa:
-    database:
+    database: mysql
     hibernate:
       ddl-auto: none
     properties:
