@@ -1,9 +1,6 @@
 package server.uckgisagi.app.review.dto.request;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import server.uckgisagi.domain.review.entity.Review;
 import server.uckgisagi.domain.store.entity.Store;
 import server.uckgisagi.domain.user.entity.User;
@@ -14,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(builderMethodName = "testBuilder")
 public class AddReviewRequest {
 
     @NotNull
@@ -27,5 +26,4 @@ public class AddReviewRequest {
         store.addReview(review);
         return review;
     }
-
 }
