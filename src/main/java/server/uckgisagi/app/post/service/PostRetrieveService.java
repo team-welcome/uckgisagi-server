@@ -29,7 +29,7 @@ public class PostRetrieveService {
     public List<PreviewPostResponse> retrieveAllPost(Long userId) {
         List<Post> scrapedPosts = scrapRepository.findScrapPostByUserId(userId);
         return postRepository
-                .findAll(Sort.by(Sort.Direction.DESC, "createdAt")).stream()
+                .findAllByPostStatus().stream()
                 .map(post -> scrapedPosts.contains(post)
                         ? PreviewPostResponse.of(post, ScrapStatus.ACTIVE)
                         : PreviewPostResponse.of(post, ScrapStatus.INACTIVE))

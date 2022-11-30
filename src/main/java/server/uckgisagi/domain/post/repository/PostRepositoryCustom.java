@@ -12,4 +12,5 @@ public interface PostRepositoryCustom {
     boolean existsByTodayDate(LocalDate today, Long userId);
     List<User> findUserIdsByTodayDate(LocalDate today, List<Long> userIds);
     Post findByPostIdAndUserId(Long postId, Long userId);
+    List<Post> findAllByPostStatus();
 }

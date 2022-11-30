@@ -71,4 +71,12 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
                 .fetchOne();
     }
 
+    @Override
+    public List<Post> findAllByPostStatus() {
+        return query.selectFrom(post)
+                .where(post.postStatus.eq(PostStatus.ACTIVE))
+                .orderBy(post.createdAt.desc())
+                .fetch();
+    }
+
 }
