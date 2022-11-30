@@ -19,7 +19,7 @@ import server.uckgisagi.domain.user.repository.UserRepository;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(properties = {"spring.config.location=classpath:application-test.yml"})
 public class ScrapServiceTest {
 
     @Autowired
