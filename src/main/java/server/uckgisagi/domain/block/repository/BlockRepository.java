@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import server.uckgisagi.domain.block.entity.Block;
 
 @Repository
-public interface BlockRepository extends JpaRepository<Block, Long> {
+public interface BlockRepository extends JpaRepository<Block, Long>, BlockRepositoryCustom {
 }

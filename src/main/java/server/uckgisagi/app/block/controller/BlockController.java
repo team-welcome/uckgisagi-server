@@ -12,6 +12,7 @@ import server.uckgisagi.config.resolver.LoginUserId;
 import springfox.documentation.annotations.ApiIgnore;
 
 import static server.uckgisagi.common.success.SuccessResponseResult.NO_CONTENT_BLOCK_USER;
+import static server.uckgisagi.common.success.SuccessResponseResult.NO_CONTENT_CANCEL_BLOCK_USER;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +26,14 @@ public class BlockController {
     public ApiSuccessResponse<SuccessResponseResult> blockUser(@RequestBody BlockUserDto blockUserRequestDto, @ApiIgnore @LoginUserId Long userId) {
         blockService.blockUser(blockUserRequestDto, userId);
         return ApiSuccessResponse.success(NO_CONTENT_BLOCK_USER);
+    }
+
+    @ApiOperation("[인증] 유저 차단 해제 페이지 - 유저 차단 해제하기")
+    @Auth
+    @DeleteMapping("/v1/block/delete")
+    public ApiSuccessResponse<SuccessResponseResult> deleteBlockUser(@RequestParam Long blockUserId, @ApiIgnore @LoginUserId Long userId) {
+        blockService.deleteBlockUser(blockUserId, userId);
+        return ApiSuccessResponse.success(NO_CONTENT_CANCEL_BLOCK_USER);
     }
 
 }
