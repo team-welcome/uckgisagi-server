@@ -23,4 +23,7 @@ public class AuditingTimeEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Asia/Seoul")
     private LocalDateTime updatedAt;
 
+    public void setTestCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

@@ -1,6 +1,8 @@
-package server.uckgisagi.repository;
+package server.uckgisagi.app.follow.repository;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,9 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@DataJpaTest
-//@Import(TestConfig.class)
-@SpringBootTest
+@SpringBootTest(properties = "spring.config.location=classpath:application-test.yml")
 public class FollowRepositoryTest {
 
     @Autowired
@@ -27,43 +27,53 @@ public class FollowRepositoryTest {
     @Autowired
     private FollowRepository followRepository;
 
+    private User master;
+    private User firstTarget;
+    private User secondTarget;
+
+    @BeforeEach
+    void setup() {
+        master = User.newInstance("firstSocialId", SocialType.APPLE, "FirstNickname");
+        firstTarget = User.newInstance("secondSocialId", SocialType.APPLE, "SecondNickname");
+        secondTarget = User.newInstance("thirdSocialId", SocialType.APPLE, "ThirdNickname");
+
+        userRepository.saveAll(List.of(master, firstTarget, secondTarget));
+
+        Follow follow = Follow.newInstance(firstTarget, master);
+        Follow follow1 = Follow.newInstance(secondTarget, master);
+        followRepository.saveAll(List.of(follow, follow1));
+
+        master.addFollowing(follow);
+        firstTarget.addFollower(follow);
+
+        master.addFollowing(follow1);
+        secondTarget.addFollower(follow1);
+    }
+
     @AfterEach
     void clean() {
         followRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
     }
 
+    @DisplayName("내가_팔로우하는_유저_레포지토리_테스트")
     @Test
     @Transactional
-    void 내가_팔로우하는_유저_레포지토리_테스트() {
-        // given
-        User first = User.newInstance("firstSocialId", SocialType.APPLE, "FirstNickname");
-        User secondTarget = User.newInstance("secondSocialId", SocialType.APPLE, "SecondNickname");
-        User thirdTarget = User.newInstance("thirdSocialId", SocialType.APPLE, "ThirdNickname");
-        userRepository.saveAll(List.of(first, secondTarget, thirdTarget));
-
-        Follow follow = Follow.newInstance(secondTarget, first);
-        Follow follow1 = Follow.newInstance(thirdTarget, first);
-        followRepository.saveAll(List.of(follow, follow1));
-
-        first.addFollowing(follow);
-        first.addFollowing(follow1);
-
-        secondTarget.addFollower(follow);
-        thirdTarget.addFollower(follow1);
-
+    void followRepository_test() {
         // when
         System.out.println("================= findMyFollowingUserByUserId =================");
         /**
          * inner join 쿼리 한방
          */
-        List<User> joinQuery = followRepository.findMyFollowingUserByUserId(first.getId());
+        List<User> joinQuery = followRepository.findMyFollowingUserByUserId(master.getId());
+        System.out.println(joinQuery.get(0).getId());
 
         System.out.println("================= getMyFollowing =================");
         /**
          * 쿼리 안날아감
          */
-        List<User> noQuery = first.getMyFollowings();
+        List<User> noQuery = master.getMyFollowings();
+        System.out.println(noQuery.get(0).getId());
 
         // then
         assertAll(
@@ -77,5 +87,4 @@ public class FollowRepositoryTest {
                 }
         );
     }
-
 }

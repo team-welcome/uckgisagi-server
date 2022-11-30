@@ -1,16 +1,15 @@
-package server.uckgisagi.app.auth;
+package server.uckgisagi.app.auth.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import server.uckgisagi.app.auth.dto.response.TokenResponse;
-import server.uckgisagi.app.auth.service.CreateTokenService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest(properties = {"spring.config.location=classpath:application-test.yml"})
 public class TokenServiceTest {
 
     @Autowired
@@ -29,5 +28,4 @@ public class TokenServiceTest {
                 () -> assertThat(tokenInfo).isNotNull()
         );
     }
-
 }
