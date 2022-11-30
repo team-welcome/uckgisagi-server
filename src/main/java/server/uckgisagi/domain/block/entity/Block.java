@@ -23,4 +23,13 @@ public class Block {
     private User user;
 
     private Long blockUserId;
+
+    private Block(User user, Long blockUserId){
+        this.user = user;
+        this.blockUserId = blockUserId;
+    }
+
+    public static Block newInstance(User user, Long blockUserId){
+        return new Block(user, blockUserId);
+    }
 }

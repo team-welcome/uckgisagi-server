@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
+import server.uckgisagi.domain.block.entity.Block;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
 import server.uckgisagi.domain.follow.entity.Follow;
 import server.uckgisagi.domain.post.entity.Post;
@@ -47,6 +48,9 @@ public class User extends AuditingTimeEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Block> blocks = new ArrayList<>();
 
     /**
      * 나를 팔로우하는 유저 List
