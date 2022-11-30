@@ -33,12 +33,11 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<SearchUserResponse> searchUserByNickname(String nickname, Long userId) {
-        UserServiceUtils.findByUserId(userRepository, userId);
+        User loginUser = UserServiceUtils.findByUserId(userRepository, userId);
         List<User> myFollowings = followRepository.findMyFollowingUserByUserId(userId);
-//        List<User> myFollowings = me.getMyFollowings();
 
         return userRepository
-                .findAllUserByNickname(nickname).stream()
+                .findAllUserByNickname(nickname, loginUser).stream()
                 .map(user -> myFollowings.contains(user)
                         ? SearchUserResponse.of(user, FollowStatus.ACTIVE)
                         : SearchUserResponse.of(user, FollowStatus.INACTIVE)

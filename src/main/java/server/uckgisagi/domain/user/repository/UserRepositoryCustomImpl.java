@@ -1,5 +1,6 @@
 package server.uckgisagi.domain.user.repository;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.user.entity.User;
@@ -23,10 +24,11 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public List<User> findAllUserByNickname(String nickname) {
+    public List<User> findAllUserByNickname(String nickname, User loginUser) {
         return query
                 .selectFrom(user).distinct()
                 .where(user.nickname.contains(nickname))
+                .where((Predicate) loginUser.getBlocks().stream().filter(block -> !block.getBlockUserId().equals(user.id))) // 현재 로그인 한 유저가 차단한 id와 같지 않은 같지 않은 userId를 가진 유저만 반환.
                 .fetch();
     }
 
