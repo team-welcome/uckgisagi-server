@@ -45,6 +45,8 @@ public enum SuccessResponseResult {
     NO_CONTENT_UNFOLLOW_USER(NO_CONTENT, "언팔로우에 성공했습니다"),
     NO_CONTENT_SCRAP_POST(NO_CONTENT, "챌린지 글 스크랩에 성공했습니다"),
     NO_CONTENT_CANCEL_SCRAP_POST(NO_CONTENT, "챌린지 글 스크랩 취소에 성공했습니다"),
+    NO_CONTENT_BLOCK_USER(NO_CONTENT, "유저 차단에 성공했습니다")
+
     ;
 
     private final SuccessStatusCode statusCode;

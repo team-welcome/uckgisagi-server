@@ -46,4 +46,11 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public String deleteUser(Long userId) {
+        User user = userRepository.findUserByUserId(userId);
+        userRepository.delete(user);
+
+        return "회원 탈퇴 원료";
+    }
 }

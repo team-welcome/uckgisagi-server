@@ -2,6 +2,7 @@ package server.uckgisagi.app.user;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,11 +30,10 @@ public class UserController {
         return ApiSuccessResponse.success(OK_SEARCH_USER, userService.searchUserByNickname(nickname, userId));
     }
 
-    @ApiOperation("[인증] 유저 차단 페이지 - 특정 유저 차단하기")
+    @ApiOperation("[인증] 회원 탈퇴 페이지 - 회원 탈퇴한 유저 삭제")
     @Auth
-    @GetMapping("/v1/user/search")
-    public ApiSuccessResponse<List<SearchUserResponse>> blockUser(@RequestParam String nickname, @ApiIgnore @LoginUserId Long userId) {
-        return ApiSuccessResponse.success(OK_SEARCH_USER, userService.searchUserByNickname(nickname, userId));
+    @DeleteMapping("/v1/user/delete")
+    public ApiSuccessResponse<String> deleteUsesr(@ApiIgnore @LoginUserId Long userId) {
+        return ApiSuccessResponse.success(OK_SEARCH_USER, userService.deleteUser(userId));
     }
-
 }
