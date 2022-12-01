@@ -13,4 +13,5 @@ public interface PostRepositoryCustom {
     List<User> findUserIdsByTodayDate(LocalDate today, List<Long> userIds);
     Post findByPostIdAndUserId(Long postId, Long userId);
     List<Post> findAllByPostStatus(User loginUser);
+    List<Post> findPostByDateAndUserId(LocalDate date, Long userId);
 }

@@ -3,7 +3,6 @@ package server.uckgisagi.domain.user.entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import server.uckgisagi.app.user.dto.request.CreateUserDto;
 import server.uckgisagi.domain.block.entity.Block;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
 import server.uckgisagi.domain.follow.entity.Follow;
@@ -143,8 +142,8 @@ public class User extends AuditingTimeEntity {
                 break;
         }
     }
+
     void changeNickname(String nickname) {
         this.nickname = nickname;
     }
-
 }

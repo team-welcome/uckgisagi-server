@@ -13,8 +13,6 @@ import server.uckgisagi.config.resolver.LoginUserId;
 import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.Valid;
-
 import static server.uckgisagi.common.success.SuccessResponseResult.*;
 
 @RestController
@@ -40,5 +38,4 @@ public class FollowController {
         followService.unfollowUser(targetUserId, userId);
         return ApiSuccessResponse.success(NO_CONTENT_UNFOLLOW_USER);
     }
-
 }

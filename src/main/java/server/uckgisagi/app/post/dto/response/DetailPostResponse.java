@@ -26,13 +26,14 @@ public class DetailPostResponse extends AuditingTimeResponse {
     }
 
     public static DetailPostResponse of(Post post, String nickname, ScrapStatus scrapStatus) {
-        return DetailPostResponse.builder()
+        DetailPostResponse response = DetailPostResponse.builder()
                 .postId(post.getId())
                 .nickname(nickname)
                 .imageUrl(post.getImageUrl())
                 .content(post.getContent())
                 .scrapStatus(scrapStatus)
                 .build();
+        response.setBaseTime(post);
+        return response;
     }
-
 }
