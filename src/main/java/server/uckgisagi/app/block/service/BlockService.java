@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.block.dto.BlockUserDto;
 import server.uckgisagi.app.follow.service.FollowService;
+import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.domain.block.entity.Block;
 import server.uckgisagi.domain.block.repository.BlockRepository;
 import server.uckgisagi.domain.follow.repository.FollowRepository;
@@ -12,6 +13,7 @@ import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -33,10 +35,23 @@ public class BlockService {
     }
 
     @Transactional
+    public List<BlockUserDto> retrieveAllBlockedUser(Long userId){
+        User me = UserServiceUtils.findByUserId(userRepository, userId);
+        List<Long> blockUserIds = me.getBlocks().stream()
+                .map(Block::getBlockUserId)
+                .collect(Collectors.toList());
+
+        return blockUserIds.stream()
+                .map(id -> BlockUserDto.of(id))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void deleteBlockUser(Long blockUserId, Long userId) {
         User blockUser = userRepository.findUserByUserId(blockUserId);
         Block block = blockRepository.findByBlockUserId(blockUser.getId(), userId);
 
         blockRepository.delete(block);
     }
+
 }
