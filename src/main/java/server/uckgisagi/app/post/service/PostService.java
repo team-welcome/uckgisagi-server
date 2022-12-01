@@ -33,9 +33,7 @@ public class PostService {
     }
 
     @Transactional
-    public String deletePost(Long postId, Long userId) {
-        Post post = postRepository.findByPostIdAndUserId(postId, userId);
-        postRepository.delete(post);
-        return "post 삭제 완료";
+    public void deletePost(Long postId, Long userId) {
+        postRepository.delete(PostServiceUtils.findByPostIdAndUserId(postRepository, postId, userId));
     }
 }

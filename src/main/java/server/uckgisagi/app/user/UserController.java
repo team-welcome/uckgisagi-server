@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
 import server.uckgisagi.app.user.service.UserService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
+import server.uckgisagi.common.success.SuccessResponseResult;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
 import springfox.documentation.annotations.ApiIgnore;
@@ -33,7 +34,8 @@ public class UserController {
     @ApiOperation("[인증] 회원 탈퇴 페이지 - 회원 탈퇴한 유저 삭제")
     @Auth
     @DeleteMapping("/v1/user/delete")
-    public ApiSuccessResponse<String> deleteUsesr(@ApiIgnore @LoginUserId Long userId) {
-        return ApiSuccessResponse.success(OK_SEARCH_USER, userService.deleteUser(userId));
+    public ApiSuccessResponse<SuccessResponseResult> deleteUser(@ApiIgnore @LoginUserId Long userId) {
+        userService.deleteUser(userId);
+        return ApiSuccessResponse.success(OK_SEARCH_USER);
     }
 }

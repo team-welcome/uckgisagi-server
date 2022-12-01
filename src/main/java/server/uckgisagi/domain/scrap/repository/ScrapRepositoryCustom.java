@@ -7,7 +7,7 @@ import server.uckgisagi.domain.user.entity.User;
 import java.util.List;
 
 public interface ScrapRepositoryCustom {
-    List<Post> findScrapPostByUserId(Long userId, User loginUser);
+    List<Post> findScrapPostByUserId(Long userId, List<Long> blockUserIds);
     boolean existsByPostAndUserId(Post post, Long userId);
     Scrap findScrapByPostIdAndUserId(Long postId, Long userId);
 }

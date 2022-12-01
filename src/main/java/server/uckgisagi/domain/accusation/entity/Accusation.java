@@ -10,9 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Accusation extends AuditingTimeEntity {
 
     @Id
@@ -20,19 +18,22 @@ public class Accusation extends AuditingTimeEntity {
     @Column(name = "accusation_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
+
+    private Accusation(final Post post, final User user) {
+        this.post = post;
+        this.user = user;
+    }
+
     public static Accusation newInstance(Post post, User user) {
-        return Accusation.builder()
-                .post(post)
-                .user(user)
-                .build();
+        return new Accusation(post, user);
     }
 
     public AccusationPostResDto toAccusePostResponseDto(Accusation accusation){
@@ -41,5 +42,4 @@ public class Accusation extends AuditingTimeEntity {
                 .userId(accusation.getUser().getId())
                 .build();
     }
-
 }

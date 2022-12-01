@@ -48,7 +48,7 @@ public class AccusationService {
         List<Accusation> accusations = accusationRepository.findAllByPostId(accusationPostReqDto.getPostId());
         if(accusations.size() >= 10){
             // 게시물 신고가 10번 이상일 경우 안 보이게 하는 로직
-            post.changePostStatus(PostStatus.INACTIVE);
+            post.changeStatus(PostStatus.INACTIVE);
         }
 
         return accusation.toAccusePostResponseDto(accusation);

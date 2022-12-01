@@ -17,9 +17,6 @@ public class AccusationPostReqDto {
     private Long postId;
 
     public Accusation toAccusationEntity(User user, Post post){
-        return Accusation.builder()
-                .user(user)
-                .post(post)
-                .build();
+        return Accusation.newInstance(post, user);
     }
 }

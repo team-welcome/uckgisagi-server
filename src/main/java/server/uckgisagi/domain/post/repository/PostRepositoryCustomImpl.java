@@ -66,17 +66,22 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
 
     @Override
     public Post findByPostIdAndUserId(Long postId, Long userId){
-        return query.selectFrom(post)
-                .where(post.id.eq(postId))
-                .where(post.user.id.eq((userId)))
+        return query
+                .selectFrom(post)
+                .where(
+                        post.id.eq(postId),
+                        post.user.id.eq(userId)
+                )
                 .fetchOne();
     }
 
     @Override
-    public List<Post> findAllByPostStatus(User loginUser) {
+    public List<Post> findAllByPostStatus(List<Long> blockUserIds) {
         return query.selectFrom(post)
-                .where(post.postStatus.eq(PostStatus.ACTIVE))
-                .where((Predicate) loginUser.getBlocks().stream().filter(block -> block.getBlockUserId().equals(post.user.id))) // post를 쓴 user의 id가 현재 로그인한 user의 차단 리스트에 있는 id와 같지 않아야 함.
+                .where(
+                        post.postStatus.eq(PostStatus.ACTIVE),
+                        post.user.id.notIn(blockUserIds)
+                )
                 .orderBy(post.createdAt.desc())
                 .fetch();
     }

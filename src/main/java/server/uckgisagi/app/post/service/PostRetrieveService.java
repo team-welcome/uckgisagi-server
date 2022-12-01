@@ -8,6 +8,7 @@ import server.uckgisagi.app.post.dto.response.DetailPostResponse;
 import server.uckgisagi.app.post.dto.response.PreviewPostResponse;
 import server.uckgisagi.app.post.dto.response.ScrapStatus;
 import server.uckgisagi.app.user.service.UserServiceUtils;
+import server.uckgisagi.domain.block.entity.Block;
 import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.post.repository.PostRepository;
 import server.uckgisagi.domain.scrap.repository.ScrapRepository;
@@ -27,10 +28,14 @@ public class PostRetrieveService {
     private final ScrapRepository scrapRepository;
 
     public List<PreviewPostResponse> retrieveAllPost(Long userId) {
-        User loginUser = userRepository.findUserByUserId(userId);
-        List<Post> scrapedPosts = scrapRepository.findScrapPostByUserId(userId, loginUser);
+        User me = userRepository.findUserByUserId(userId);
+        List<Long> blockUserIds = me.getBlocks().stream()
+                .map(Block::getBlockUserId)
+                .collect(Collectors.toList());
+        List<Post> scrapedPosts = scrapRepository.findScrapPostByUserId(userId, blockUserIds);
+
         return postRepository
-                .findAllByPostStatus(loginUser).stream()
+                .findAllByPostStatus(blockUserIds).stream()
                 .map(post -> scrapedPosts.contains(post)
                         ? PreviewPostResponse.of(post, ScrapStatus.ACTIVE)
                         : PreviewPostResponse.of(post, ScrapStatus.INACTIVE))
@@ -38,8 +43,12 @@ public class PostRetrieveService {
     }
 
     public List<PreviewPostResponse> retrieveScrapPost(Long userId) {
-        User loginUser = userRepository.findUserByUserId(userId);
-        return scrapRepository.findScrapPostByUserId(userId,loginUser).stream()
+        List<Long> blockUserIds = userRepository.findUserByUserId(userId)
+                .getBlocks().stream()
+                .map(Block::getBlockUserId)
+                .collect(Collectors.toList());;
+
+        return scrapRepository.findScrapPostByUserId(userId, blockUserIds).stream()
                 .map(post -> PreviewPostResponse.of(post, ScrapStatus.ACTIVE))
                 .collect(Collectors.toList());
     }
@@ -59,5 +68,4 @@ public class PostRetrieveService {
                 ScrapStatus.ACTIVE
         );
     }
-
 }
