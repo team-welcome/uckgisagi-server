@@ -3,6 +3,7 @@ package server.uckgisagi.app.post.dto.response;
 import lombok.*;
 import server.uckgisagi.common.dto.AuditingTimeResponse;
 import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.domain.user.entity.User;
 
 @ToString
 @Getter
@@ -10,24 +11,27 @@ import server.uckgisagi.domain.post.entity.Post;
 public class DetailPostResponse extends AuditingTimeResponse {
 
     private Long postId;
+    private Long userId;
     private String nickname;
     private String imageUrl;
     private String content;
     private ScrapStatus scrapStatus;
 
     @Builder(access = AccessLevel.PACKAGE)
-    private DetailPostResponse(final Long postId, final String nickname, final String imageUrl,
+    private DetailPostResponse(final Long postId, final Long userId, final String nickname, final String imageUrl,
                                final String content, final ScrapStatus scrapStatus) {
         this.postId = postId;
+        this.userId = userId;
         this.nickname = nickname;
         this.imageUrl = imageUrl;
         this.content = content;
         this.scrapStatus = scrapStatus;
     }
 
-    public static DetailPostResponse of(Post post, String nickname, ScrapStatus scrapStatus) {
+    public static DetailPostResponse of(Post post, User user, String nickname, ScrapStatus scrapStatus) {
         DetailPostResponse response = DetailPostResponse.builder()
                 .postId(post.getId())
+                .userId(user.getId())
                 .nickname(nickname)
                 .imageUrl(post.getImageUrl())
                 .content(post.getContent())
