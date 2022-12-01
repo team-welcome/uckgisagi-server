@@ -57,13 +57,14 @@ public class PostRetrieveService {
         User user = UserServiceUtils.findByUserId(userRepository, userId);
         Post post = PostServiceUtils.findByPostId(postRepository, postId);
         return scrapRepository.existsByPostAndUserId(post, userId)
-                ? DetailPostResponse.of(post, user.getNickname(), ScrapStatus.ACTIVE)
-                : DetailPostResponse.of(post, user.getNickname(), ScrapStatus.INACTIVE);
+                ? DetailPostResponse.of(post, post.getUser(), user.getNickname(), ScrapStatus.ACTIVE)
+                : DetailPostResponse.of(post, post.getUser(), user.getNickname(), ScrapStatus.INACTIVE);
     }
 
     public DetailPostResponse retrieveDetailScrapPost(Long postId, Long userId) {
         return DetailPostResponse.of(
                 PostServiceUtils.findByPostId(postRepository, postId),
+                PostServiceUtils.findByPostId(postRepository, postId).getUser(),
                 UserServiceUtils.findByUserId(userRepository, userId).getNickname(),
                 ScrapStatus.ACTIVE
         );
