@@ -97,7 +97,9 @@ public class HomeRetrieveService implements HomeService {
     }
 
     private boolean isWithinThisMonth(LocalDate postCreatedAt) {
-        return postCreatedAt.isAfter(THIS_MONTH_DATE) && postCreatedAt.isBefore(THIS_MONTH_DATE.plusMonths(ONE_MONTH));
+        return postCreatedAt.getDayOfMonth() - START_DAY_OF_MONTH != 0
+                ? postCreatedAt.isAfter(THIS_MONTH_DATE) && postCreatedAt.isBefore(THIS_MONTH_DATE.plusMonths(ONE_MONTH))
+                : postCreatedAt.isEqual(THIS_MONTH_DATE);
     }
 
     @Transactional(readOnly = true)
