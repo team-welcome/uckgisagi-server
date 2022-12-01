@@ -18,8 +18,8 @@ import java.util.Date;
 @PropertySource(value = "classpath:application-jwt.yml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
 public class JwtUtils {
 
-    private static final long ACCESS_TOKEN_EXPIRES_TIME =  60 * 1000L;   // 30분 -> 개발시 14일
-    private static final long REFRESH_TOKEN_EXPIRES_TIME = 2 * 60 * 1000L;  // 7일  -> 개발시 30일
+    private static final long ACCESS_TOKEN_EXPIRES_TIME = 14 * 24 * 2 * 30 * 60 * 1000L;            // 30분
+    private static final long REFRESH_TOKEN_EXPIRES_TIME = 30 * 24 * 60 * 60 * 1000L;  // 7일
 
     private final Key secretKey;
 
@@ -80,5 +80,4 @@ public class JwtUtils {
             return e.getClaims();
         }
     }
-
 }
