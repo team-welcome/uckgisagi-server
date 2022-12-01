@@ -1,8 +1,10 @@
 package server.uckgisagi.domain.post.repository;
 
+import com.querydsl.core.types.Predicate;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.domain.post.entity.enumerate.PostStatus;
 import server.uckgisagi.domain.user.entity.User;
 
 import java.time.LocalDate;
@@ -63,6 +65,27 @@ public class PostRepositoryCustomImpl implements PostRepositoryCustom {
     }
 
     @Override
+    public Post findByPostIdAndUserId(Long postId, Long userId){
+        return query
+                .selectFrom(post)
+                .where(
+                        post.id.eq(postId),
+                        post.user.id.eq(userId)
+                )
+                .fetchOne();
+    }
+
+    @Override
+    public List<Post> findAllByPostStatus(List<Long> blockUserIds) {
+        return query.selectFrom(post)
+                .where(
+                        post.postStatus.eq(PostStatus.ACTIVE),
+                        post.user.id.notIn(blockUserIds)
+                )
+                .orderBy(post.createdAt.desc())
+                .fetch();
+    }
+
     public List<Post> findPostByDateAndUserId(LocalDate date, Long userId) {
         return query
                 .selectFrom(post)

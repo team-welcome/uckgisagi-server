@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
 import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
+import server.uckgisagi.domain.block.entity.Block;
 import server.uckgisagi.domain.follow.repository.FollowRepository;
 import server.uckgisagi.domain.user.entity.Token;
 import server.uckgisagi.domain.user.entity.User;
@@ -33,12 +34,12 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<SearchUserResponse> searchUserByNickname(String nickname, Long userId) {
-        UserServiceUtils.findByUserId(userRepository, userId);
+        User me = UserServiceUtils.findByUserId(userRepository, userId);
         List<User> myFollowings = followRepository.findMyFollowingUserByUserId(userId);
-//        List<User> myFollowings = me.getMyFollowings();
+        List<Long> blockedUserIds = me.getBlocks().stream().map(Block::getBlockUserId).collect(Collectors.toList());
 
         return userRepository
-                .findAllUserByNickname(nickname).stream()
+                .findAllUserByNickname(nickname, blockedUserIds).stream()
                 .map(user -> myFollowings.contains(user)
                         ? SearchUserResponse.of(user, FollowStatus.ACTIVE)
                         : SearchUserResponse.of(user, FollowStatus.INACTIVE)
@@ -46,4 +47,8 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void deleteUser(Long userId) {
+        userRepository.delete(UserServiceUtils.findByUserId(userRepository, userId));
+    }
 }

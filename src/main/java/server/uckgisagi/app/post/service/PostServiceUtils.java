@@ -18,4 +18,12 @@ public class PostServiceUtils {
         return post;
     }
 
+    @NotNull
+    public static Post findByPostIdAndUserId(PostRepository postRepository, Long postId, Long userId) {
+        Post post = postRepository.findByPostIdAndUserId(postId, userId);
+        if (post == null) {
+            throw new NotFoundException(String.format("존재하지 않는 게시글 (%s) 입니다", postId), NOT_FOUND_POST_EXCEPTION);
+        }
+        return post;
+    }
 }

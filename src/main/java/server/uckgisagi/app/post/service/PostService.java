@@ -10,6 +10,8 @@ import server.uckgisagi.app.post.dto.request.AddPostRequest;
 import server.uckgisagi.app.post.dto.response.GradeResponse;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.common.type.FileType;
+import server.uckgisagi.domain.accusation.repository.AccusationRepository;
+import server.uckgisagi.domain.post.entity.Post;
 import server.uckgisagi.domain.post.repository.PostRepository;
 import server.uckgisagi.domain.user.entity.User;
 import server.uckgisagi.domain.user.repository.UserRepository;
@@ -30,4 +32,8 @@ public class PostService {
         return GradeResponse.from(user.getGrade());
     }
 
+    @Transactional
+    public void deletePost(Long postId, Long userId) {
+        postRepository.delete(PostServiceUtils.findByPostIdAndUserId(postRepository, postId, userId));
+    }
 }

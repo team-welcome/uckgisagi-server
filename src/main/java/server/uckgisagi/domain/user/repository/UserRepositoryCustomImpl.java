@@ -23,10 +23,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public List<User> findAllUserByNickname(String nickname) {
+    public List<User> findAllUserByNickname(String nickname, List<Long> blockUserIds) {
         return query
                 .selectFrom(user).distinct()
-                .where(user.nickname.contains(nickname))
+                .where(
+                        user.nickname.contains(nickname),
+                        user.id.notIn(blockUserIds)
+                )
                 .fetch();
     }
 
@@ -50,5 +53,4 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
                         user.socialInfo.socialType.eq(socialType)
                 ).fetchFirst() != null;
     }
-
 }

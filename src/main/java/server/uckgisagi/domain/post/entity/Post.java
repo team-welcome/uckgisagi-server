@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import server.uckgisagi.domain.common.AuditingTimeEntity;
+import server.uckgisagi.domain.post.entity.enumerate.PostStatus;
 import server.uckgisagi.domain.user.entity.User;
 
 import javax.persistence.*;
@@ -32,12 +33,17 @@ public class Post extends AuditingTimeEntity {
     @Column(nullable = false)
     private String content;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 10)
+    private PostStatus postStatus;
+
     @Builder(access = AccessLevel.PACKAGE)
     private Post(final User user, final String imageUrl, final String title, final String content) {
         this.user = user;
         this.imageUrl = imageUrl;
         this.title = title;
         this.content = content;
+        this.postStatus = PostStatus.ACTIVE;
     }
 
     public static Post newInstance(User user, String imageUrl, String title, String content) {
@@ -49,4 +55,7 @@ public class Post extends AuditingTimeEntity {
                 .build();
     }
 
+    public void changeStatus(PostStatus postStatus){
+        this.postStatus = postStatus;
+    }
 }
