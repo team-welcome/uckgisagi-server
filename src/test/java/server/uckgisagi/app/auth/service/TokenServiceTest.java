@@ -18,7 +18,7 @@ public class TokenServiceTest {
     @Test
     @DisplayName("유저 아이디로 토큰 생성하기")
     void create_token_by_userId() {
-        final Long USER_ID = 1L;
+        final Long USER_ID = 0L;
 
         TokenResponse tokenInfo = createTokenService.createTokenInfo(USER_ID);
         System.out.println(tokenInfo.getAccessToken());
