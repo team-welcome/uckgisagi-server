@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import server.uckgisagi.domain.user.entity.enumerate.UserGrade;
+import server.uckgisagi.app.user.domain.entity.enumerate.UserGrade;
 
 @ToString
 @Getter
@@ -20,5 +20,4 @@ public class GradeResponse {
     public static GradeResponse from(UserGrade grade) {
         return new GradeResponse(grade);
     }
-
 }

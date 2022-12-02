@@ -2,8 +2,8 @@ package server.uckgisagi.app.post.service;
 
 import org.jetbrains.annotations.NotNull;
 import server.uckgisagi.common.exception.custom.NotFoundException;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.post.repository.PostRepository;
+import server.uckgisagi.app.post.domain.entity.Post;
+import server.uckgisagi.app.post.domain.repository.PostRepository;
 
 import static server.uckgisagi.common.exception.ErrorResponseResult.*;
 

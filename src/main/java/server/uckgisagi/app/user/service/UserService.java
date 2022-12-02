@@ -6,12 +6,12 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
 import server.uckgisagi.app.user.dto.response.FollowStatus;
 import server.uckgisagi.app.user.dto.response.SearchUserResponse;
-import server.uckgisagi.domain.block.entity.Block;
-import server.uckgisagi.domain.follow.repository.FollowRepository;
-import server.uckgisagi.domain.user.entity.Token;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.TokenRepository;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.block.domain.entity.Block;
+import server.uckgisagi.app.follow.domain.repository.FollowRepository;
+import server.uckgisagi.app.user.domain.entity.Token;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.TokenRepository;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.Objects;

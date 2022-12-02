@@ -4,8 +4,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import server.uckgisagi.common.exception.custom.NotFoundException;
-import server.uckgisagi.domain.store.entity.Store;
-import server.uckgisagi.domain.store.repository.StoreRepository;
+import server.uckgisagi.app.store.domain.entity.Store;
+import server.uckgisagi.app.store.domain.repository.StoreRepository;
 
 import static server.uckgisagi.common.exception.ErrorResponseResult.*;
 
@@ -26,5 +26,4 @@ public class StoreServiceUtils {
         }
         return store;
     }
-
 }

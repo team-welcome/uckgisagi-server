@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.follow.entity.Follow;
-import server.uckgisagi.domain.follow.repository.FollowRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.follow.domain.entity.Follow;
+import server.uckgisagi.app.follow.domain.repository.FollowRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 // FIXME: 2022/11/18 user 연관관계 메서드 오류
 @Service
@@ -41,5 +41,4 @@ public class FollowService {
 
         followRepository.delete(FollowServiceUtils.findByFolloweeUserIdAndFollowerUserId(followRepository, targetUserId, userId));
     }
-
 }

@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import server.uckgisagi.domain.common.AuditingTimeEntity;
+import server.uckgisagi.common.domain.AuditingTimeEntity;
 
 import java.time.LocalDateTime;
 
@@ -28,5 +28,4 @@ public abstract class AuditingTimeResponse {
     protected void setCreatedTime(AuditingTimeEntity auditingTimeEntity) {
         this.createdAt = auditingTimeEntity.getCreatedAt();
     }
-
 }

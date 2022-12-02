@@ -1,7 +1,7 @@
 package server.uckgisagi.app.post.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.app.post.domain.entity.Post;
 
 @ToString
 @Getter
@@ -30,5 +30,4 @@ public class PreviewPostResponse {
                 .scrapStatus(scrapStatus)
                 .build();
     }
-
 }

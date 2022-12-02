@@ -12,8 +12,8 @@ import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.common.success.SuccessResponseResult;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
-import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
@@ -31,5 +31,4 @@ public class NotificationController {
         notificationService.sendNotification(userId, UserServiceUtils.findByUserId(userRepository, friendUserId));
         return ApiSuccessResponse.success(SuccessResponseResult.CREATED_NOTIFICATION);
     }
-
 }

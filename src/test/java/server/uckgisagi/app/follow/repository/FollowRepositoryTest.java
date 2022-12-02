@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import server.uckgisagi.domain.follow.entity.Follow;
-import server.uckgisagi.domain.follow.repository.FollowRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.follow.domain.entity.Follow;
+import server.uckgisagi.app.follow.domain.repository.FollowRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 

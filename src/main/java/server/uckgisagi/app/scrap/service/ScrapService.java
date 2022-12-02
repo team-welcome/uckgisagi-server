@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.post.service.PostServiceUtils;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.post.repository.PostRepository;
-import server.uckgisagi.domain.scrap.entity.Scrap;
-import server.uckgisagi.domain.scrap.repository.ScrapRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.post.domain.entity.Post;
+import server.uckgisagi.app.post.domain.repository.PostRepository;
+import server.uckgisagi.app.scrap.domain.entity.Scrap;
+import server.uckgisagi.app.scrap.domain.repository.ScrapRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

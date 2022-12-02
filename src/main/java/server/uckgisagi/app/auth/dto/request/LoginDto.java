@@ -2,7 +2,7 @@ package server.uckgisagi.app.auth.dto.request;
 
 import lombok.*;
 import server.uckgisagi.app.user.dto.request.CreateUserDto;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 
 @ToString
 @Getter
@@ -21,5 +21,4 @@ public class LoginDto {
     public CreateUserDto toCreateUserDto(String socialId, String nickname, String fcmToken) {
         return CreateUserDto.of(nickname, socialId, socialType, fcmToken);
     }
-
 }

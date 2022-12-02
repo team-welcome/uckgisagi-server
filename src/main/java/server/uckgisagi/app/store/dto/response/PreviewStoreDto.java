@@ -1,7 +1,7 @@
 package server.uckgisagi.app.store.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.store.entity.Store;
+import server.uckgisagi.app.store.domain.entity.Store;
 
 @ToString
 @Getter
@@ -29,5 +29,4 @@ public class PreviewStoreDto {
                 .imageUrl(store.getImageUrl())
                 .build();
     }
-
 }

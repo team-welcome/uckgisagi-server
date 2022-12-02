@@ -1,8 +1,8 @@
 package server.uckgisagi.app.post.dto.request;
 
 import lombok.*;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.post.domain.entity.Post;
+import server.uckgisagi.app.user.domain.entity.User;
 
 import javax.validation.constraints.NotBlank;
 
@@ -21,5 +21,4 @@ public class AddPostRequest {
     public Post toPostEntity(User user, String imageUrl) {
         return Post.newInstance(user, imageUrl, title, content);
     }
-
 }

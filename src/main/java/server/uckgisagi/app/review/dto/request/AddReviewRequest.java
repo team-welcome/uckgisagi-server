@@ -1,9 +1,9 @@
 package server.uckgisagi.app.review.dto.request;
 
 import lombok.*;
-import server.uckgisagi.domain.review.entity.Review;
-import server.uckgisagi.domain.store.entity.Store;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.review.domain.entity.Review;
+import server.uckgisagi.app.store.domain.entity.Store;
+import server.uckgisagi.app.user.domain.entity.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

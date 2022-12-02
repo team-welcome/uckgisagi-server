@@ -1,7 +1,7 @@
 package server.uckgisagi.app.store.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.store.entity.Store;
+import server.uckgisagi.app.store.domain.entity.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +45,4 @@ public class OneStoreResponse {
         response.tags.addAll(store.getStoreTagValue());
         return response;
     }
-
 }

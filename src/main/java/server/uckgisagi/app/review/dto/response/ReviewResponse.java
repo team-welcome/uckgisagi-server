@@ -1,7 +1,7 @@
 package server.uckgisagi.app.review.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.review.entity.Review;
+import server.uckgisagi.app.review.domain.entity.Review;
 
 @ToString
 @Getter
@@ -26,5 +26,4 @@ public class ReviewResponse {
                 .comment(review.getComment())
                 .build();
     }
-
 }

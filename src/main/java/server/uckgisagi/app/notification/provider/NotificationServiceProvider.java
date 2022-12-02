@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import server.uckgisagi.app.notification.service.NotificationService;
 import server.uckgisagi.app.notification.service.impl.FollowNotificationService;
 import server.uckgisagi.app.notification.service.impl.PokeNotificationService;
-import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
+import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -29,5 +29,4 @@ public class NotificationServiceProvider {
     public NotificationService getNotificationService(NotificationType notificationType) {
         return notificationServiceMap.get(notificationType);
     }
-
 }

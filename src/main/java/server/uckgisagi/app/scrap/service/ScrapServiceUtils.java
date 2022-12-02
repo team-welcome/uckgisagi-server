@@ -2,8 +2,8 @@ package server.uckgisagi.app.scrap.service;
 
 import org.jetbrains.annotations.NotNull;
 import server.uckgisagi.common.exception.custom.NotFoundException;
-import server.uckgisagi.domain.scrap.entity.Scrap;
-import server.uckgisagi.domain.scrap.repository.ScrapRepository;
+import server.uckgisagi.app.scrap.domain.entity.Scrap;
+import server.uckgisagi.app.scrap.domain.repository.ScrapRepository;
 
 import static server.uckgisagi.common.exception.ErrorResponseResult.*;
 

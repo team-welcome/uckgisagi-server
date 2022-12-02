@@ -7,9 +7,9 @@ import server.uckgisagi.app.auth.service.AuthService;
 import server.uckgisagi.app.user.service.UserService;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.common.util.RandomNicknameProviderUtils;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 import server.uckgisagi.external.client.apple.AppleTokenDecoder;
 
 @Service

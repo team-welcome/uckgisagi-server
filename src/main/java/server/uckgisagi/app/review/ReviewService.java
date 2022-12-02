@@ -7,9 +7,9 @@ import server.uckgisagi.app.review.dto.request.AddReviewRequest;
 import server.uckgisagi.app.review.dto.response.ReviewResponse;
 import server.uckgisagi.app.store.service.StoreServiceUtils;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.review.repository.ReviewRepository;
-import server.uckgisagi.domain.store.repository.StoreRepository;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.review.domain.repository.ReviewRepository;
+import server.uckgisagi.app.store.domain.repository.StoreRepository;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +37,4 @@ public class ReviewService {
                 .map(ReviewResponse::from)
                 .collect(Collectors.toList());
     }
-
 }

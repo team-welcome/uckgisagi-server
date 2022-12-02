@@ -1,8 +1,8 @@
 package server.uckgisagi.app.user.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.entity.enumerate.UserGrade;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.entity.enumerate.UserGrade;
 
 @ToString
 @Getter

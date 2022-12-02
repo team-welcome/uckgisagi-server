@@ -1,19 +1,18 @@
 package server.uckgisagi.app.post.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.post.dto.response.DetailPostResponse;
 import server.uckgisagi.app.post.dto.response.PreviewPostResponse;
 import server.uckgisagi.app.post.dto.response.ScrapStatus;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.block.entity.Block;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.post.repository.PostRepository;
-import server.uckgisagi.domain.scrap.repository.ScrapRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.block.domain.entity.Block;
+import server.uckgisagi.app.post.domain.entity.Post;
+import server.uckgisagi.app.post.domain.repository.PostRepository;
+import server.uckgisagi.app.scrap.domain.repository.ScrapRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
