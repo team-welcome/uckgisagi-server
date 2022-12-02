@@ -14,6 +14,7 @@ import server.uckgisagi.domain.user.repository.TokenRepository;
 import server.uckgisagi.domain.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,10 +37,13 @@ public class UserService {
     public List<SearchUserResponse> searchUserByNickname(String nickname, Long userId) {
         User me = UserServiceUtils.findByUserId(userRepository, userId);
         List<User> myFollowings = followRepository.findMyFollowingUserByUserId(userId);
-        List<Long> blockedUserIds = me.getBlocks().stream().map(Block::getBlockUserId).collect(Collectors.toList());
+        List<Long> blockedUserIds = me.getBlocks().stream()
+                .map(Block::getBlockUserId)
+                .collect(Collectors.toList());
 
         return userRepository
                 .findAllUserByNickname(nickname, blockedUserIds).stream()
+                .filter(user -> !Objects.equals(user, me)) // JPA Entity 에 equals, hashCode 오버라이딩이 옳은가?
                 .map(user -> myFollowings.contains(user)
                         ? SearchUserResponse.of(user, FollowStatus.ACTIVE)
                         : SearchUserResponse.of(user, FollowStatus.INACTIVE)
