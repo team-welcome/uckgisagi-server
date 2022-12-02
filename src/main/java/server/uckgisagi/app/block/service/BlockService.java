@@ -6,11 +6,10 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.block.dto.BlockUserDto;
 import server.uckgisagi.app.follow.service.FollowService;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.domain.block.entity.Block;
-import server.uckgisagi.domain.block.repository.BlockRepository;
-import server.uckgisagi.domain.follow.repository.FollowRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.block.domain.entity.Block;
+import server.uckgisagi.app.block.domain.repository.BlockRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

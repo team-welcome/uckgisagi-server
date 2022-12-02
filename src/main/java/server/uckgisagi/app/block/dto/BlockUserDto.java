@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import server.uckgisagi.app.post.dto.response.PreviewPostResponse;
-import server.uckgisagi.app.post.dto.response.ScrapStatus;
-import server.uckgisagi.domain.post.entity.Post;
 
 @Getter
 @NoArgsConstructor

@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import server.uckgisagi.app.auth.provider.AuthServiceProvider;
 import server.uckgisagi.app.auth.service.AuthService;
 import server.uckgisagi.app.auth.service.impl.AppleAuthService;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 
 import static org.junit.jupiter.api.Assertions.*;
 

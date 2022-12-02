@@ -1,7 +1,7 @@
 package server.uckgisagi.app.user.dto.request;
 
 import lombok.*;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 
 @ToString
 @Getter

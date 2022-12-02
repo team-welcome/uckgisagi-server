@@ -10,11 +10,9 @@ import server.uckgisagi.app.post.dto.request.AddPostRequest;
 import server.uckgisagi.app.post.dto.response.GradeResponse;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.common.type.FileType;
-import server.uckgisagi.domain.accusation.repository.AccusationRepository;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.post.repository.PostRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.post.domain.repository.PostRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

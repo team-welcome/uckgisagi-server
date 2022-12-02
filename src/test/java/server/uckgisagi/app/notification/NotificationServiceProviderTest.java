@@ -8,7 +8,7 @@ import server.uckgisagi.app.notification.provider.NotificationServiceProvider;
 import server.uckgisagi.app.notification.service.NotificationService;
 import server.uckgisagi.app.notification.service.impl.FollowNotificationService;
 import server.uckgisagi.app.notification.service.impl.PokeNotificationService;
-import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
+import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

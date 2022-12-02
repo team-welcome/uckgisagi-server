@@ -11,13 +11,13 @@ import server.uckgisagi.app.review.ReviewService;
 import server.uckgisagi.app.review.dto.request.AddReviewRequest;
 import server.uckgisagi.app.review.dto.response.ReviewResponse;
 import server.uckgisagi.common.exception.custom.NotFoundException;
-import server.uckgisagi.domain.review.entity.Review;
-import server.uckgisagi.domain.review.repository.ReviewRepository;
-import server.uckgisagi.domain.store.entity.Store;
-import server.uckgisagi.domain.store.repository.StoreRepository;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.review.domain.entity.Review;
+import server.uckgisagi.app.review.domain.repository.ReviewRepository;
+import server.uckgisagi.app.store.domain.entity.Store;
+import server.uckgisagi.app.store.domain.repository.StoreRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import java.util.List;
 

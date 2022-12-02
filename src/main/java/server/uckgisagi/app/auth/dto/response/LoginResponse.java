@@ -1,7 +1,7 @@
 package server.uckgisagi.app.auth.dto.response;
 
 import lombok.*;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.user.domain.entity.User;
 
 @ToString
 @Getter

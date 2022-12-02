@@ -4,10 +4,10 @@ import com.google.api.core.ApiFuture;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import org.slf4j.Logger;
-import server.uckgisagi.domain.notification.entity.Notification;
-import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
-import server.uckgisagi.domain.notification.repository.NotificationRepository;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.notification.domain.entity.Notification;
+import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
+import server.uckgisagi.app.notification.domain.repository.NotificationRepository;
+import server.uckgisagi.app.user.domain.entity.User;
 
 public abstract class SendMessageService {
 
@@ -62,5 +62,4 @@ public abstract class SendMessageService {
                 .setToken(targetUserToken)
                 .build();
     }
-
 }

@@ -11,7 +11,6 @@ import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.common.success.SuccessResponseResult;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
-import server.uckgisagi.domain.post.entity.Post;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;

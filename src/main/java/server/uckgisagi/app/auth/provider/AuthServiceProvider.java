@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import server.uckgisagi.app.auth.service.AuthService;
 import server.uckgisagi.app.auth.service.impl.AppleAuthService;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 
 import javax.annotation.PostConstruct;
 import java.util.HashMap;
@@ -26,5 +26,4 @@ public class AuthServiceProvider {
     public AuthService getAuthService(SocialType socialType) {
         return authServiceMap.get(socialType);
     }
-
 }

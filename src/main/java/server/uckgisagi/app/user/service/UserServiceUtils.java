@@ -3,12 +3,11 @@ package server.uckgisagi.app.user.service;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import server.uckgisagi.common.exception.ErrorResponseResult;
 import server.uckgisagi.common.exception.custom.ConflictException;
 import server.uckgisagi.common.exception.custom.NotFoundException;
-import server.uckgisagi.domain.user.entity.User;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
-import server.uckgisagi.domain.user.repository.UserRepository;
+import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.repository.UserRepository;
 
 import static server.uckgisagi.common.exception.ErrorResponseResult.*;
 

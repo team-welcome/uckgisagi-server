@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import server.uckgisagi.app.store.dto.response.AllStoreResponse;
 import server.uckgisagi.app.store.dto.response.OneStoreResponse;
 import server.uckgisagi.app.store.dto.response.PreviewStoreDto;
-import server.uckgisagi.domain.store.entity.Store;
-import server.uckgisagi.domain.store.repository.StoreRepository;
+import server.uckgisagi.app.store.domain.entity.Store;
+import server.uckgisagi.app.store.domain.repository.StoreRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,5 +37,4 @@ public class StoreRetrieveService {
     public OneStoreResponse retrieveOneStore(Long storeId) {
         return OneStoreResponse.from(StoreServiceUtils.findByStoreId(storeRepository, storeId));
     }
-
 }

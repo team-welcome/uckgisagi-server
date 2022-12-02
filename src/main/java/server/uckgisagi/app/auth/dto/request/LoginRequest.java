@@ -1,7 +1,7 @@
 package server.uckgisagi.app.auth.dto.request;
 
 import lombok.*;
-import server.uckgisagi.domain.user.entity.enumerate.SocialType;
+import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -24,5 +24,4 @@ public class LoginRequest {
     public LoginDto toServiceDto() {
         return LoginDto.of(socialToken, socialType, fcmToken);
     }
-
 }

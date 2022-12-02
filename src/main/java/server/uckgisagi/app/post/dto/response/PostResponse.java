@@ -2,7 +2,7 @@ package server.uckgisagi.app.post.dto.response;
 
 import lombok.*;
 import server.uckgisagi.common.dto.AuditingTimeResponse;
-import server.uckgisagi.domain.post.entity.Post;
+import server.uckgisagi.app.post.domain.entity.Post;
 
 @ToString
 @Getter
@@ -32,5 +32,4 @@ public class PostResponse extends AuditingTimeResponse {
         response.setBaseTime(post);
         return response;
     }
-
 }

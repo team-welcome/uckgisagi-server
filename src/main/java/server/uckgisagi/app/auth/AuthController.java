@@ -13,7 +13,7 @@ import server.uckgisagi.app.auth.provider.AuthServiceProvider;
 import server.uckgisagi.app.auth.service.AuthService;
 import server.uckgisagi.app.auth.service.CreateTokenService;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.user.domain.entity.User;
 
 import javax.validation.Valid;
 
@@ -40,5 +40,4 @@ public class AuthController {
     public ApiSuccessResponse<TokenResponse> reissueToken(@Valid @RequestBody TokenRequest request) {
         return ApiSuccessResponse.success(CREATED_REISSUE_TOKEN, createTokenService.reissueToken(request));
     }
-
 }

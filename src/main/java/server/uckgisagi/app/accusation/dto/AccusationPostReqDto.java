@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import server.uckgisagi.domain.accusation.entity.Accusation;
-import server.uckgisagi.domain.post.entity.Post;
-import server.uckgisagi.domain.user.entity.User;
+import server.uckgisagi.app.accusation.domain.entity.Accusation;
+import server.uckgisagi.app.post.domain.entity.Post;
+import server.uckgisagi.app.user.domain.entity.User;
 
 @Getter
 @NoArgsConstructor

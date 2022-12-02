@@ -10,7 +10,7 @@ import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.common.success.SuccessResponseResult;
 import server.uckgisagi.config.interceptor.Auth;
 import server.uckgisagi.config.resolver.LoginUserId;
-import server.uckgisagi.domain.notification.entity.enumerate.NotificationType;
+import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
 import springfox.documentation.annotations.ApiIgnore;
 
 import static server.uckgisagi.common.success.SuccessResponseResult.*;
