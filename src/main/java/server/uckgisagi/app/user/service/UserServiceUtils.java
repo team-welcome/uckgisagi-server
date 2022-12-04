@@ -20,6 +20,12 @@ public class UserServiceUtils {
         }
     }
 
+    public static void validateExistUser(UserRepository userRepository, Long userId) {
+        if (!userRepository.existsByUserId(userId)) {
+            throw new NotFoundException(String.format("존재하지 않는 유저 (%s) 입니다", userId), NOT_FOUND_USER_EXCEPTION);
+        }
+    }
+
     @NotNull
     public static User findByUserId(UserRepository userRepository, Long userId) {
         User user = userRepository.findUserByUserId(userId);
@@ -32,5 +38,4 @@ public class UserServiceUtils {
     public static User findUserBySocialIdAndSocialType(UserRepository userRepository, String socialId, SocialType socialType) {
         return userRepository.findUserBySocialIdAndSocialType(socialId, socialType);
     }
-
 }

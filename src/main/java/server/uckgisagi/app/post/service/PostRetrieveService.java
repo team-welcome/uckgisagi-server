@@ -53,19 +53,17 @@ public class PostRetrieveService {
     }
 
     public DetailPostResponse retrieveDetailPost(Long postId, Long userId) {
-        User user = UserServiceUtils.findByUserId(userRepository, userId);
+//        UserServiceUtils.validateExistUser(userRepository, userId); // TODO 과연 모든 api 마다 유저 체크를 해야하는가?
         Post post = PostServiceUtils.findByPostId(postRepository, postId);
         return scrapRepository.existsByPostAndUserId(post, userId)
-                ? DetailPostResponse.of(post, user.getId(), user.getNickname(), ScrapStatus.ACTIVE)
-                : DetailPostResponse.of(post, user.getId(), user.getNickname(), ScrapStatus.INACTIVE);
+                ? DetailPostResponse.of(post, ScrapStatus.ACTIVE)
+                : DetailPostResponse.of(post, ScrapStatus.INACTIVE);
     }
 
     public DetailPostResponse retrieveDetailScrapPost(Long postId, Long userId) {
-        User user = UserServiceUtils.findByUserId(userRepository, userId);
+//        UserServiceUtils.validateExistUser(userRepository, userId);
         return DetailPostResponse.of(
                 PostServiceUtils.findByPostId(postRepository, postId),
-                user.getId(),
-                user.getNickname(),
                 ScrapStatus.ACTIVE
         );
     }

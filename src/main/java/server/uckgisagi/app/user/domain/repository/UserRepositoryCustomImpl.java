@@ -53,4 +53,13 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
                         user.socialInfo.socialType.eq(socialType)
                 ).fetchFirst() != null;
     }
+
+    @Override
+    public boolean existsByUserId(Long userId) {
+        return query
+                .selectOne()
+                .from(user)
+                .where(user.id.eq(userId))
+                .fetchFirst() != null;
+    }
 }

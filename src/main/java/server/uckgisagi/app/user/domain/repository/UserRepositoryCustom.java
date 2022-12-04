@@ -10,4 +10,5 @@ public interface UserRepositoryCustom {
     List<User> findAllUserByNickname(String nickname, List<Long> blockUserIds);
     User findUserBySocialIdAndSocialType(String socialId, SocialType socialType);
     boolean existsBySocialIdAndSocialType(String socialId, SocialType socialType);
+    boolean existsByUserId(Long userId);
 }

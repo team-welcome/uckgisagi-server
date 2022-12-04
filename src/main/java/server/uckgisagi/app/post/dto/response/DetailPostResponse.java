@@ -27,11 +27,11 @@ public class DetailPostResponse extends AuditingTimeResponse {
         this.scrapStatus = scrapStatus;
     }
 
-    public static DetailPostResponse of(Post post, Long userId, String nickname, ScrapStatus scrapStatus) {
+    public static DetailPostResponse of(Post post, ScrapStatus scrapStatus) {
         DetailPostResponse response = DetailPostResponse.builder()
                 .postId(post.getId())
-                .userId(userId)
-                .nickname(nickname)
+                .userId(post.getUser().getId())
+                .nickname(post.getUser().getNickname())
                 .imageUrl(post.getImageUrl())
                 .content(post.getContent())
                 .scrapStatus(scrapStatus)
