@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      accessKey: AKIASXRVBQ2MYAEWXMFQ
-      secretKey: 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
+      accessKey: AKIASXRVBQ2MSEW33BEX
+      secretKey: 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
     s3:
       bucket: uckgisagi-bucket
     region:
