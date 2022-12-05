@@ -45,7 +45,7 @@ public class PostRetrieveService {
         List<Long> blockUserIds = userRepository.findUserByUserId(userId)
                 .getBlocks().stream()
                 .map(Block::getBlockUserId)
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
 
         return scrapRepository.findScrapPostByUserId(userId, blockUserIds).stream()
                 .map(post -> PreviewPostResponse.of(post, ScrapStatus.ACTIVE))

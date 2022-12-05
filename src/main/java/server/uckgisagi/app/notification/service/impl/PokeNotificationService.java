@@ -9,7 +9,7 @@ import server.uckgisagi.app.notification.service.NotificationService;
 import server.uckgisagi.app.notification.service.SendMessageService;
 import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
 import server.uckgisagi.app.notification.domain.repository.NotificationRepository;
-import server.uckgisagi.app.user.domain.entity.User;
+import server.uckgisagi.app.user.domain.dictionary.UserDictionary;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +21,12 @@ public class PokeNotificationService extends SendMessageService implements Notif
 
     @Override
     @Transactional
-    public void sendNotification(Long userId, User friend) {
-        sendMessageByNotificationType(notificationRepository, userId, friend, NotificationType.POKE, log);
+    public void sendNotification(Long userId, Long targetUserId, UserDictionary dictionary) {
+        sendMessageByNotificationType(
+                notificationRepository,
+                dictionary.getUserByUserId(userId),
+                dictionary.getUserByUserId(targetUserId),
+                NotificationType.POKE, log
+        );
     }
 }

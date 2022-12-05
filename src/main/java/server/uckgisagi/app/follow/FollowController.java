@@ -27,14 +27,14 @@ public class FollowController {
     @PostMapping("/v1/follow/{targetUserId}")
     public ApiSuccessResponse<SuccessResponseResult> followUser(@PathVariable Long targetUserId, @ApiIgnore @LoginUserId Long userId) {
         NotificationService notificationService = notificationServiceProvider.getNotificationService(NotificationType.FOLLOW);
-        notificationService.sendNotification(userId, followService.followUser(targetUserId, userId));
+        notificationService.sendNotification(userId, targetUserId, followService.followUser(targetUserId, userId));
         return ApiSuccessResponse.success(CREATED_NOTIFICATION);
     }
 
     @ApiOperation("[인증] 유저 검색 페이지 - 언팔로우 하기")
     @Auth
     @DeleteMapping("/v1/unfollow/{targetUserId}")
-    public ApiSuccessResponse<SuccessResponseResult> unfollowUser(@PathVariable Long targetUserId,  @ApiIgnore @LoginUserId Long userId) {
+    public ApiSuccessResponse<SuccessResponseResult> unfollowUser(@PathVariable Long targetUserId, @ApiIgnore @LoginUserId Long userId) {
         followService.unfollowUser(targetUserId, userId);
         return ApiSuccessResponse.success(NO_CONTENT_UNFOLLOW_USER);
     }
