@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Notification extends AuditingTimeEntity {
+public class Notifications extends AuditingTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,21 +26,22 @@ public class Notification extends AuditingTimeEntity {
     private Long targetUserId;      // 알람을 받을 유저 아이디
 
     @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
     private NotificationType type;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String message;
 
     @Builder(access = AccessLevel.PACKAGE)
-    private Notification(final Long userId, final Long targetUserId, final NotificationType type, final String message) {
+    private Notifications(final Long userId, final Long targetUserId, final NotificationType type, final String message) {
         this.userId = userId;
         this.targetUserId = targetUserId;
         this.type = type;
         this.message = message;
     }
 
-    public static Notification newInstance(Long userId, Long targetUserId, NotificationType type, String message) {
-        return Notification.builder()
+    public static Notifications newInstance(Long userId, Long targetUserId, NotificationType type, String message) {
+        return Notifications.builder()
                 .userId(userId)
                 .targetUserId(targetUserId)
                 .type(type)
