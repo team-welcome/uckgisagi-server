@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import server.uckgisagi.app.notification.provider.NotificationServiceProvider;
 import server.uckgisagi.app.notification.service.NotificationService;
+import server.uckgisagi.app.user.domain.dictionary.UserDictionary;
 import server.uckgisagi.app.user.service.UserServiceUtils;
 import server.uckgisagi.common.dto.ApiSuccessResponse;
 import server.uckgisagi.common.success.SuccessResponseResult;
@@ -15,6 +16,8 @@ import server.uckgisagi.config.resolver.LoginUserId;
 import server.uckgisagi.app.notification.domain.entity.enumerate.NotificationType;
 import server.uckgisagi.app.user.domain.repository.UserRepository;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +31,9 @@ public class NotificationController {
     @PostMapping("/v1/notification/{friendUserId}/poke")
     public ApiSuccessResponse<SuccessResponseResult> sendPokeNotification(@PathVariable Long friendUserId, @ApiIgnore @LoginUserId Long userId) {
         NotificationService notificationService = notificationServiceProvider.getNotificationService(NotificationType.POKE);
-        notificationService.sendNotification(userId, UserServiceUtils.findByUserId(userRepository, friendUserId));
+        notificationService.sendNotification(userId, friendUserId, UserDictionary.from(List.of(
+                UserServiceUtils.findByUserId(userRepository, userId),
+                UserServiceUtils.findByUserId(userRepository, friendUserId))));
         return ApiSuccessResponse.success(SuccessResponseResult.CREATED_NOTIFICATION);
     }
 }
