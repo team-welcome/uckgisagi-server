@@ -17,7 +17,7 @@ import java.io.IOException;
 @Slf4j
 @Component
 @PropertySource(value = "classpath:application-firebase.yml", factory = YamlPropertySourceFactory.class, ignoreResourceNotFound = true)
-public class FcmInitializer {
+public class FirebaseInitializer {
 
     @Value("${firebase.fcm.config.path}")
     private String firebaseConfigPath;
@@ -25,7 +25,7 @@ public class FcmInitializer {
     private static FirebaseApp firebaseApp;
 
     @Bean
-    public void initFirebaseMessaging() throws IOException {
+    public void initFirebase() throws IOException {
         ClassPathResource resource = new ClassPathResource(firebaseConfigPath);
         GoogleCredentials googleCredentials = GoogleCredentials.fromStream(resource.getInputStream());
         FirebaseOptions options = FirebaseOptions.builder()
