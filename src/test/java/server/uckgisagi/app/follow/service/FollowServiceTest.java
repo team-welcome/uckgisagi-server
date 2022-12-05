@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import server.uckgisagi.app.user.domain.dictionary.UserDictionary;
 import server.uckgisagi.common.exception.custom.ConflictException;
 import server.uckgisagi.common.exception.custom.NotFoundException;
 import server.uckgisagi.app.follow.domain.entity.Follow;
@@ -52,11 +53,11 @@ public class FollowServiceTest {
         User target = users.get(SECOND);
 
         // when
-        User followUser = followService.followUser(target.getId(), user.getId());
+        UserDictionary userDictionary = followService.followUser(target.getId(), user.getId());
 
         // then
         assertAll(
-                () -> assertThat(followUser).isNotNull()
+                () -> assertThat(userDictionary).isNotNull()
 //                () -> assertThat(followUser.getFollowers()).isNotNull(),
 //                () -> assertThat(followUser.getFollowings()).isEmpty(),
 //                () -> assertThat(user.getFollowers()).isEmpty(),
