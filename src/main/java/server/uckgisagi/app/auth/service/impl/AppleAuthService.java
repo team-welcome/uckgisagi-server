@@ -6,7 +6,7 @@ import server.uckgisagi.app.auth.dto.request.LoginDto;
 import server.uckgisagi.app.auth.service.AuthService;
 import server.uckgisagi.app.user.service.UserService;
 import server.uckgisagi.app.user.service.UserServiceUtils;
-import server.uckgisagi.common.util.RandomNicknameProviderUtils;
+import server.uckgisagi.common.util.RandomNicknameUtils;
 import server.uckgisagi.app.user.domain.entity.User;
 import server.uckgisagi.app.user.domain.entity.enumerate.SocialType;
 import server.uckgisagi.app.user.domain.repository.UserRepository;
@@ -27,7 +27,7 @@ public class AppleAuthService implements AuthService {
         String socialId = appleTokenDecoder.getSocialIdFromIdToken(request.getSocialAccessToken());
         User user = UserServiceUtils.findUserBySocialIdAndSocialType(userRepository, socialId, SOCIAL_TYPE);
         if (user == null) {
-            return userService.registerUser(request.toCreateUserDto(socialId, RandomNicknameProviderUtils.getRandomNickname(), request.getFcmToken()));
+            return userService.registerUser(request.toCreateUserDto(socialId, RandomNicknameUtils.generate(), request.getFcmToken()));
         }
         return user;
     }
