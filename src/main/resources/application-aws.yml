@@ -1,8 +1,8 @@
 cloud:
   aws:
     credentials:
-      accessKey: AKIASXRVBQ2MSEW33BEX
-      secretKey: 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
+      accessKey: ${AWS_ACCESS_KEY_ID}
+      secretKey: ${AWS_SECRET_ACCESS_KEY}
     s3:
       bucket: uckgisagi-bucket
     region:
