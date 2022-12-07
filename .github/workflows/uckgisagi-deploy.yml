@@ -8,6 +8,9 @@ on:
 env:
   S3_BUCKET_NAME: uckgisagi-bucket
   PROJECT_NAME: uckgisagi-server
+  RESOURCE_AWS_PATH: ./src/main/resources/application-aws.yml
+  RESOURCE_JWT_PATH: ./src/main/resources/application-jwt.yml
+  RESOURCE_PROD_PATH: ./src/main/resources/application-prod.yml
 
 jobs:
   build:
