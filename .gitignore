@@ -36,9 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
-
-### Firebase Admin ###
-src/main/resources/firebase/*.json
-
 ### querydsl ###
 src/querydsl
+
+### h2 database ###
+database

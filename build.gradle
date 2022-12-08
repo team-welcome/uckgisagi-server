@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
     // aws
-//    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 
     // jetbrains annotation
     compileOnly 'org.jetbrains:annotations:23.0.0'
@@ -63,8 +63,7 @@ dependencies {
     implementation 'org.json:json:20220924'
 
     // swagger
-    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
 }
 
 jar {
