@@ -27,7 +27,7 @@
 * QueryDsl
 * Spring Security
 * Swagger
-    * http://localhost:8080/api/swagger-ui/index.html
+    * http://54.180.212.221/api/swagger-ui/index.html
 * Sl4j Logging
 * Validation
 * 그 외 스타터 라이브러리
