@@ -32,31 +32,4 @@
 * Validation
 * 그 외 스타터 라이브러리
 
-
-### JPA 사용을 위한 application.yml 에서의 datasource 설정
-```
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/uckgisagi_dev?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-
-  jpa:
-    database: mysql
-    hibernate:
-      ddl-auto: create
-```
-## 구현 내용
-
-### User
-
-### Post
-
-### Home
-
-### Review
-
-### Store
-
-
-
 ### 감사합니다
